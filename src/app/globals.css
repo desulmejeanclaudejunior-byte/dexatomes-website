@@ -1,43 +1,71 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #1d4ed8;
-  --color-primary-light: #3b82f6;
-  --color-primary-dark: #1e3a8a;
-  --color-accent: #2563eb;
-  --color-navy: #0a0f1e;
-  --color-navy-light: #111936;
-  --color-navy-mid: #151d3b;
-  --color-surface: #1a2342;
-  --color-surface-light: #1f2b4d;
-  --color-page: #f8fafc;
+  --color-bg: #0c1222;
+  --color-surface: #111a2e;
+  --color-surface-light: #162038;
+  --color-border: rgba(59, 130, 246, 0.12);
+  --color-border-light: rgba(255, 255, 255, 0.06);
+  --color-blue: #2563eb;
+  --color-blue-light: #3b82f6;
+  --color-blue-bright: #60a5fa;
+  --color-accent: #1d4ed8;
 }
 
 html { scroll-behavior: smooth; }
-
 ::selection { background: #2563eb; color: white; }
 
-.hero-gradient {
-  background: linear-gradient(135deg, #0a0f1e 0%, #111936 40%, #0d1530 100%);
+/* Circuit board background pattern */
+.circuit-bg {
+  position: relative;
 }
-
-.grid-bg {
+.circuit-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+    radial-gradient(circle at 1px 1px, rgba(59,130,246,0.08) 1px, transparent 0);
+  background-size: 32px 32px;
+  pointer-events: none;
 }
 
-.glow-blue {
-  box-shadow: 0 0 80px rgba(37, 99, 235, 0.25), 0 0 160px rgba(37, 99, 235, 0.1);
+/* Circuit lines decorative */
+.circuit-lines {
+  background-image:
+    linear-gradient(90deg, transparent 49.5%, rgba(59,130,246,0.06) 49.5%, rgba(59,130,246,0.06) 50.5%, transparent 50.5%),
+    linear-gradient(0deg, transparent 49.5%, rgba(59,130,246,0.06) 49.5%, rgba(59,130,246,0.06) 50.5%, transparent 50.5%);
+  background-size: 64px 64px;
 }
 
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Glow effects */
+.glow-sm { box-shadow: 0 0 30px rgba(37, 99, 235, 0.15); }
+.glow-md { box-shadow: 0 0 60px rgba(37, 99, 235, 0.2), 0 0 120px rgba(37, 99, 235, 0.05); }
+.glow-border { box-shadow: 0 0 0 1px rgba(59,130,246,0.15), 0 8px 32px rgba(0,0,0,0.3); }
+
+/* Panel card style */
+.panel {
+  background: linear-gradient(135deg, rgba(17,26,46,0.95), rgba(12,18,34,0.98));
+  border: 1px solid rgba(59,130,246,0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+.panel:hover {
+  border-color: rgba(59,130,246,0.25);
+  box-shadow: 0 0 40px rgba(37,99,235,0.1), 0 16px 48px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+/* Light panel variant */
+.panel-light {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.panel-light:hover {
+  border-color: rgba(59,130,246,0.2);
+  transform: translateY(-2px);
 }
 
 @media (prefers-reduced-motion: reduce) {
