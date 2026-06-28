@@ -1,16 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
 const links = [
-  { href: '/', label: 'Accueil' },
-  { href: '/services', label: 'Services' },
-  { href: '/store', label: 'Boutique' },
-  { href: '/dexuslab', label: 'DexusLab' },
-  { href: '/about', label: 'À propos' },
-  { href: '/contact', label: 'Contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '#services' },
+  { label: 'Store', href: '#store' },
+  { label: 'DexusLab', href: '#dexuslab' },
+  { label: 'About', href: '#about' },
+  { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
@@ -25,70 +26,74 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0A1628]/95 backdrop-blur-md shadow-lg'
-          : 'bg-[#0A1628]'
-      } border-b border-[#0066CC]/30`}
+          ? 'bg-white/80 backdrop-blur-xl shadow-sm'
+          : 'bg-white/60 backdrop-blur-xl'
+      } border-b border-slate-200/60`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded bg-[#0066CC] font-extrabold text-white text-sm">
-            DX
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="relative">
+            <div className="absolute inset-0 bg-blue-500/20 rounded-lg blur-md group-hover:bg-blue-500/30 transition-all" />
+            <div className="relative bg-gradient-to-br from-blue-600 to-blue-500 rounded-lg p-1.5">
+              <span className="font-extrabold text-white text-sm tracking-wider">DX</span>
+            </div>
           </div>
-          <div className="hidden sm:block">
-            <span className="font-extrabold text-white">DEX </span>
-            <span className="font-semibold text-[#00AAFF]">ATOMES</span>
-            <span className="ml-1 text-xs text-[#94A3B8]">LLC</span>
-          </div>
+          <span className="font-bold text-[#0A1628] text-sm tracking-tight">DEX ATOMES LLC</span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <Link
-              key={l.href}
+              key={l.label}
               href={l.href}
-              className="text-sm font-semibold text-[#94A3B8] transition-colors hover:text-[#00AAFF]"
+              className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
             >
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="rounded-md bg-[#0066CC] px-5 py-2 text-sm font-bold text-white transition-all hover:bg-[#00AAFF] hover:-translate-y-0.5"
-          >
-            Réserver →
-          </Link>
         </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="text-white md:hidden"
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-3">
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="hidden md:block">
+            <Link
+              href="#contact"
+              className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
+            >
+              Get Started →
+            </Link>
+          </motion.div>
+
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden text-[#0A1628]"
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="border-t border-[#0066CC]/30 bg-[#0A1628] px-6 py-6 md:hidden">
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-200/60 px-6 py-6">
           <div className="flex flex-col gap-4">
             {links.map((l) => (
               <Link
-                key={l.href}
+                key={l.label}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-base font-semibold text-[#94A3B8] transition-colors hover:text-[#00AAFF]"
+                className="text-base font-medium text-slate-600 hover:text-blue-600 transition-colors"
               >
                 {l.label}
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="#contact"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-block rounded-md bg-[#0066CC] px-5 py-3 text-center text-sm font-bold text-white"
+              className="mt-2 text-center bg-blue-600 text-white font-semibold py-3 rounded-xl"
             >
-              Réserver →
+              Get Started →
             </Link>
           </div>
         </div>

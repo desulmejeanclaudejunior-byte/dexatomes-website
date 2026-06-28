@@ -1,42 +1,41 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
 
-const inter = Inter({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '600', '700', '800'],
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-jakarta',
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dexatomes.com'),
   title: {
-    default: 'Dex Atomes LLC — Technology. Education. Innovation.',
+    default: 'Dex Atomes LLC — Technology, Education & Innovation',
     template: '%s | Dex Atomes LLC',
   },
   description:
-    'Développement web & mobile, robotique, cybersécurité, DexusLab et livres éducatifs. Orlando, Florida.',
+    'Software development, robotics consulting, and engineering education. DexusLab learning platform and Robotique Moderne — the 129-page robotics guide.',
   keywords: [
     'Dex Atomes',
     'DexusLab',
-    'robotique',
+    'robotics',
     'Arduino',
-    'développement web',
+    'web development',
     'mobile app',
-    'programmeur Orlando',
-    'ebook robotique',
+    'Orlando developer',
+    'robotics ebook',
     'Jean-Claude Desulme',
   ],
   authors: [
-    { name: 'Jean-Claude Junior Desulme', url: 'https://dexatomes.com/about' },
+    { name: 'Jean-Claude Junior Desulme', url: 'https://dexatomes.com' },
   ],
   openGraph: {
     type: 'website',
-    locale: 'fr_FR',
-    alternateLocale: 'en_US',
     url: 'https://dexatomes.com',
     siteName: 'Dex Atomes LLC',
+    title: 'Dex Atomes LLC',
+    description: 'Where engineers are built.',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
@@ -79,17 +78,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={inter.className}>
+    <html lang="en" className={jakarta.variable}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       </head>
-      <body className="min-h-screen bg-[#0A1628] text-white antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <body className="font-[family-name:var(--font-jakarta)] antialiased">
+        {children}
       </body>
     </html>
   )

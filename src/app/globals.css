@@ -2,54 +2,32 @@
 
 @theme inline {
   --color-navy: #0A1628;
-  --color-navy-light: #0F2240;
-  --color-blue: #0066CC;
+  --color-navy-800: #0d1f3c;
+  --color-navy-700: #112347;
+  --color-navy-600: #152b57;
+  --color-blue: #0055CC;
+  --color-blue-500: #0066CC;
+  --color-blue-400: #2280E8;
+  --color-blue-300: #5BA3F5;
   --color-sky: #00AAFF;
-  --color-subtle: #94A3B8;
-  --color-card: #111D35;
-  --color-card-border: #1A3155;
+  --color-sky-300: #6DCEFF;
+  --color-violet: #6C3DE8;
+  --color-violet-400: #8B5CF6;
+  --color-page-bg: #f0f4fa;
 }
 
-html {
-  scroll-behavior: smooth;
+html { scroll-behavior: smooth; }
+
+.glow-blue {
+  box-shadow: 0 0 60px rgba(0, 102, 204, 0.35), 0 0 120px rgba(0, 102, 204, 0.15);
 }
 
-body {
-  font-family: 'Inter', sans-serif;
+.glow-violet {
+  box-shadow: 0 0 60px rgba(108, 61, 232, 0.35), 0 0 120px rgba(108, 61, 232, 0.12);
 }
 
-/* Circuit dot pattern */
-.circuit-dots {
-  position: relative;
-}
-
-.circuit-dots::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, #0066CC 1px, transparent 1px);
-  background-size: 28px 28px;
-  opacity: 0.07;
-  pointer-events: none;
-}
-
-/* Glow animation */
-@keyframes pulse-glow {
-  0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 170, 255, 0.4)); }
-  50% { filter: drop-shadow(0 0 40px rgba(0, 170, 255, 0.8)); }
-}
-
-.animate-glow {
-  animation: pulse-glow 2.8s ease-in-out infinite;
-}
-
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s ease-in-out infinite;
+.glow-text {
+  text-shadow: 0 0 40px rgba(0, 170, 255, 0.4);
 }
 
 @media (prefers-reduced-motion: reduce) {

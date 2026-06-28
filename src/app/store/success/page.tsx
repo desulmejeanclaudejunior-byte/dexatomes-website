@@ -1,37 +1,40 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { CheckCircle, Download } from 'lucide-react'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Achat Réussi',
+  title: 'Purchase Complete',
 }
 
 export default function SuccessPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center pt-16">
-      <div className="mx-auto max-w-md px-6 text-center">
-        <CheckCircle className="mx-auto mb-6 h-16 w-16 text-green-400" />
-        <h1 className="mb-4 text-3xl font-extrabold">Merci pour votre achat !</h1>
-        <p className="mb-8 text-[#94A3B8]">
-          Votre copie de Robotique Moderne est prête. Vous recevrez également un
-          email de confirmation avec le lien de téléchargement.
-        </p>
-        <a
-          href="#"
-          className="mb-4 inline-flex items-center gap-2 rounded-lg bg-[#0066CC] px-8 py-4 font-bold text-white transition-all hover:bg-[#00AAFF]"
-        >
-          <Download size={18} />
-          Télécharger le PDF
-        </a>
-        <div className="mt-6">
-          <Link
-            href="/"
-            className="text-sm text-[#00AAFF] transition-colors hover:text-white"
+    <>
+      <Navbar />
+      <div className="flex min-h-screen items-center justify-center bg-[#f0f4fa] pt-16">
+        <div className="mx-auto max-w-md px-6 text-center">
+          <div className="text-5xl mb-6">✅</div>
+          <h1 className="mb-4 text-3xl font-extrabold text-[#0A1628]">
+            Thank you for your purchase!
+          </h1>
+          <p className="mb-8 text-slate-500">
+            Your copy of Robotique Moderne is ready. You&#39;ll also receive a
+            confirmation email with the download link.
+          </p>
+          <a
+            href="#"
+            className="mb-4 inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl transition-colors"
           >
-            ← Retour à l&#39;accueil
-          </Link>
+            Download PDF
+          </a>
+          <div className="mt-6">
+            <Link href="/" className="text-sm text-blue-600 hover:text-blue-500 transition-colors">
+              ← Back to home
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   )
 }

@@ -9,41 +9,33 @@ function getStripe() {
 
 export async function POST() {
   if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY === 'sk_live_REPLACE_ME') {
-    return NextResponse.json(
-      { error: 'Stripe is not configured yet' },
-      { status: 503 }
-    )
+    return NextResponse.json({ error: 'Stripe is not configured yet' }, { status: 503 })
   }
 
   try {
     const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
+      mode: 'payment',
       line_items: [
         {
           price_data: {
             currency: 'usd',
+            unit_amount: 1299,
             product_data: {
               name: 'Robotique Moderne — PDF',
-              description:
-                'Guide Complet pour Débutants. 129 pages, 10 chapitres.',
+              description: '129-page French robotics guide · Instant download',
             },
-            unit_amount: 1499,
           },
           quantity: 1,
         },
       ],
-      mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dexatomes.com'}/store/success`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dexatomes.com'}/store`,
     })
 
     return NextResponse.json({ url: session.url })
   } catch (error) {
     console.error('Checkout error:', error)
-    return NextResponse.json(
-      { error: 'Failed to create checkout session' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 })
   }
 }
