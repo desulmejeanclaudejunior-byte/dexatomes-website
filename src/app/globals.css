@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0A1628;
+  --color-navy-light: #0F2240;
+  --color-blue: #0066CC;
+  --color-sky: #00AAFF;
+  --color-subtle: #94A3B8;
+  --color-card: #111D35;
+  --color-card-border: #1A3155;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Circuit dot pattern */
+.circuit-dots {
+  position: relative;
+}
+
+.circuit-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #0066CC 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+/* Glow animation */
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 170, 255, 0.4)); }
+  50% { filter: drop-shadow(0 0 40px rgba(0, 170, 255, 0.8)); }
+}
+
+.animate-glow {
+  animation: pulse-glow 2.8s ease-in-out infinite;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
