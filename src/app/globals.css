@@ -5,17 +5,20 @@
   --color-surface: #111a2e;
   --color-surface-light: #162038;
   --color-border: rgba(59, 130, 246, 0.12);
-  --color-border-light: rgba(255, 255, 255, 0.06);
   --color-blue: #2563eb;
   --color-blue-light: #3b82f6;
   --color-blue-bright: #60a5fa;
-  --color-accent: #1d4ed8;
+  --color-cyan: #06b6d4;
+  --color-cyan-light: #22d3ee;
+  --color-purple: #8b5cf6;
+  --color-purple-light: #a78bfa;
+  --color-silver: #94a3b8;
+  --color-silver-light: #cbd5e1;
 }
 
 html { scroll-behavior: smooth; }
 ::selection { background: #2563eb; color: white; }
 
-/* Circuit board background pattern */
 .circuit-bg {
   position: relative;
 }
@@ -24,25 +27,22 @@ html { scroll-behavior: smooth; }
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(59,130,246,0.08) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, rgba(6,182,212,0.06) 1px, transparent 0);
   background-size: 32px 32px;
   pointer-events: none;
 }
 
-/* Circuit lines decorative */
-.circuit-lines {
+.grid-lines {
   background-image:
-    linear-gradient(90deg, transparent 49.5%, rgba(59,130,246,0.06) 49.5%, rgba(59,130,246,0.06) 50.5%, transparent 50.5%),
-    linear-gradient(0deg, transparent 49.5%, rgba(59,130,246,0.06) 49.5%, rgba(59,130,246,0.06) 50.5%, transparent 50.5%);
+    linear-gradient(90deg, transparent 49.5%, rgba(59,130,246,0.04) 49.5%, rgba(59,130,246,0.04) 50.5%, transparent 50.5%),
+    linear-gradient(0deg, transparent 49.5%, rgba(59,130,246,0.04) 49.5%, rgba(59,130,246,0.04) 50.5%, transparent 50.5%);
   background-size: 64px 64px;
 }
 
-/* Glow effects */
-.glow-sm { box-shadow: 0 0 30px rgba(37, 99, 235, 0.15); }
-.glow-md { box-shadow: 0 0 60px rgba(37, 99, 235, 0.2), 0 0 120px rgba(37, 99, 235, 0.05); }
-.glow-border { box-shadow: 0 0 0 1px rgba(59,130,246,0.15), 0 8px 32px rgba(0,0,0,0.3); }
+.glow-blue { box-shadow: 0 0 60px rgba(37, 99, 235, 0.2), 0 0 120px rgba(37, 99, 235, 0.06); }
+.glow-cyan { box-shadow: 0 0 60px rgba(6, 182, 212, 0.15), 0 0 120px rgba(6, 182, 212, 0.05); }
+.glow-purple { box-shadow: 0 0 40px rgba(139, 92, 246, 0.15); }
 
-/* Panel card style */
 .panel {
   background: linear-gradient(135deg, rgba(17,26,46,0.95), rgba(12,18,34,0.98));
   border: 1px solid rgba(59,130,246,0.1);
@@ -51,21 +51,29 @@ html { scroll-behavior: smooth; }
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 .panel:hover {
-  border-color: rgba(59,130,246,0.25);
-  box-shadow: 0 0 40px rgba(37,99,235,0.1), 0 16px 48px rgba(0,0,0,0.2);
+  border-color: rgba(6,182,212,0.2);
+  box-shadow: 0 0 40px rgba(6,182,212,0.06), 0 16px 48px rgba(0,0,0,0.2);
   transform: translateY(-2px);
 }
 
-/* Light panel variant */
-.panel-light {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+.panel-cyan {
+  background: linear-gradient(135deg, rgba(17,26,46,0.95), rgba(12,18,34,0.98));
+  border: 1px solid rgba(6,182,212,0.15);
   border-radius: 16px;
-  transition: border-color 0.3s, transform 0.3s;
 }
-.panel-light:hover {
-  border-color: rgba(59,130,246,0.2);
-  transform: translateY(-2px);
+
+.gradient-text-blue {
+  background: linear-gradient(to right, #3b82f6, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(to right, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 @media (prefers-reduced-motion: reduce) {
