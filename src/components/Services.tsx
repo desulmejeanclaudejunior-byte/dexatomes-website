@@ -1,57 +1,48 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Globe, Smartphone, Cpu, Shield, GraduationCap, Wrench } from 'lucide-react'
 
 const services = [
-  { icon: '💻', title: 'Web & Mobile Development', desc: 'Modern, scalable web and mobile applications.', href: '#contact' },
-  { icon: '🤖', title: 'Robotics & Automation', desc: 'Smart systems using Arduino, ESP32, and AI.', href: '#contact' },
-  { icon: '🔐', title: 'IT & Network Security', desc: 'Protect your systems and strengthen your network.', href: '#contact' },
-  { icon: '🎓', title: '1-on-1 Mentoring', desc: 'Personalized guidance in tech and engineering.', href: '#contact' },
-  { icon: '💡', title: 'Tech Consulting', desc: 'Architecture, audits, and technical strategy.', href: '#contact' },
-  { icon: '</>', title: 'Custom Software Projects', desc: 'End-to-end solutions built for your needs.', href: '#contact' },
+  { icon: Globe, title: 'Web Development', desc: 'Fast, responsive websites and web apps built with modern frameworks. E-commerce, SaaS, dashboards.' },
+  { icon: Smartphone, title: 'Mobile Apps', desc: 'Native-quality iOS & Android applications. React Native, Expo, Firebase backend.' },
+  { icon: Cpu, title: 'Robotics & IoT', desc: 'Custom hardware, Arduino, ESP32, sensors, drones. From prototype to production.' },
+  { icon: Shield, title: 'IT & Security', desc: 'Network configuration, security audits, infrastructure setup and monitoring.' },
+  { icon: GraduationCap, title: 'Training & Mentoring', desc: 'One-on-one sessions in programming, robotics, web development. All skill levels.' },
+  { icon: Wrench, title: 'Tech Consulting', desc: 'Architecture decisions, code reviews, technology strategy for startups and teams.' },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="bg-[#f0f4fa] py-24 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-xs font-semibold text-blue-600 tracking-[2.5px] uppercase mb-3">
-            Our Services
-          </p>
-          <h2 className="font-extrabold text-[#0A1628] text-3xl md:text-4xl tracking-tight">
-            What we build for you
+    <section id="services" className="py-24 bg-slate-50">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <p className="text-blue-600 text-sm font-semibold tracking-wide uppercase mb-3">Services</p>
+          <h2 className="text-slate-900 text-3xl md:text-4xl font-bold tracking-tight">
+            What we do best
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
+              key={s.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,85,204,0.12)' }}
-              className="bg-white/70 backdrop-blur-xl border border-white/60 rounded-2xl p-6 flex flex-col gap-4 cursor-pointer transition-shadow group"
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              className="group bg-white rounded-2xl border border-slate-100 p-7 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-12 h-12 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:border-blue-600 transition-all">
-                <span className="group-hover:grayscale group-hover:brightness-200 transition-all">
-                  {s.icon}
-                </span>
+              <div className="w-11 h-11 bg-blue-50 group-hover:bg-blue-600 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300">
+                <s.icon size={20} className="text-blue-600 group-hover:text-white transition-colors duration-300" />
               </div>
-              <div>
-                <h3 className="font-bold text-[#0A1628] text-sm leading-snug mb-2">
-                  {s.title}
-                </h3>
-                <p className="text-slate-500 text-xs leading-relaxed">{s.desc}</p>
-              </div>
-              <a
-                href={s.href}
-                className="text-blue-600 text-xs font-semibold group-hover:text-blue-500 transition-colors mt-auto"
-              >
-                Learn more →
-              </a>
+              <h3 className="text-slate-900 font-semibold mb-2">{s.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
             </motion.div>
           ))}
         </div>
