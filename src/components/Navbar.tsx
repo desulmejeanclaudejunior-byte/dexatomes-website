@@ -20,7 +20,7 @@ export default function Navbar() {
   const path = usePathname()
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 bg-[#0c1222]/90 backdrop-blur-xl border-b border-white/[0.04]">
+    <nav className="fixed top-0 inset-x-0 z-50 bg-[#0c1222]/90 backdrop-blur-xl border-b border-[#00E5FF]/[0.06]">
       <div className="max-w-7xl mx-auto px-5 h-14 flex items-center justify-between">
         <Link href="/"><Logo size="sm" /></Link>
 
@@ -28,7 +28,7 @@ export default function Navbar() {
           {links.map(l => (
             <Link key={l.href} href={l.href}
               className={`px-3.5 py-1.5 text-[13px] font-medium rounded-lg transition-all ${
-                path === l.href ? 'text-blue-400 bg-blue-500/10' : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+                path === l.href ? 'text-[#00E5FF] bg-[#00E5FF]/[0.08]' : 'text-slate-400 hover:text-[#00E5FF] hover:bg-[#00E5FF]/[0.04]'
               }`}>
               {l.label}
             </Link>
@@ -36,7 +36,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link href="/contact" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-500 text-white text-[13px] font-semibold px-4 py-1.5 rounded-lg transition-colors shadow-sm shadow-blue-600/20">
+          <Link href="/contact" className="hidden md:inline-flex btn-accent text-[13px] px-4 py-1.5 rounded-lg">
             Get Started
           </Link>
           <button onClick={() => setOpen(!open)} className="lg:hidden text-white" aria-label="Menu">
@@ -46,14 +46,14 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="lg:hidden bg-[#0c1222] border-t border-white/[0.04] px-5 py-4">
+        <div className="lg:hidden bg-[#0c1222] border-t border-[#00E5FF]/[0.06] px-5 py-4">
           {links.map(l => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
-              className={`block py-2 text-sm font-medium ${path === l.href ? 'text-blue-400' : 'text-slate-400'}`}>
+              className={`block py-2 text-sm font-medium ${path === l.href ? 'text-[#00E5FF]' : 'text-slate-400'}`}>
               {l.label}
             </Link>
           ))}
-          <Link href="/contact" onClick={() => setOpen(false)} className="block mt-3 text-center bg-blue-600 text-white font-semibold py-2 rounded-lg text-sm">
+          <Link href="/contact" onClick={() => setOpen(false)} className="block mt-3 text-center btn-accent py-2 rounded-lg text-sm">
             Get Started
           </Link>
         </div>

@@ -4,76 +4,87 @@
   --color-bg: #0c1222;
   --color-surface: #111a2e;
   --color-surface-light: #162038;
-  --color-border: rgba(59, 130, 246, 0.12);
+
   --color-blue: #2563eb;
   --color-blue-light: #3b82f6;
   --color-blue-bright: #60a5fa;
-  --color-cyan: #06b6d4;
-  --color-cyan-light: #22d3ee;
+
+  /* Primary accent — bright cyan */
+  --color-cyan: #00E5FF;
+  --color-cyan-dim: #00b8d4;
+  --color-cyan-glow: rgba(0, 229, 255, 0.15);
+
+  /* Secondary accent — vibrant teal */
+  --color-teal: #00FFC6;
+  --color-teal-dim: #00d4a6;
+
   --color-purple: #8b5cf6;
-  --color-purple-light: #a78bfa;
   --color-silver: #94a3b8;
   --color-silver-light: #cbd5e1;
 }
 
 html { scroll-behavior: smooth; }
-::selection { background: #2563eb; color: white; }
+::selection { background: #00E5FF; color: #0c1222; }
 
-.circuit-bg {
-  position: relative;
-}
+/* Circuit dot pattern */
 .circuit-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(6,182,212,0.06) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(0,229,255,0.04) 1px, transparent 0);
   background-size: 32px 32px;
   pointer-events: none;
 }
+.circuit-bg { position: relative; }
 
 .grid-lines {
   background-image:
-    linear-gradient(90deg, transparent 49.5%, rgba(59,130,246,0.04) 49.5%, rgba(59,130,246,0.04) 50.5%, transparent 50.5%),
-    linear-gradient(0deg, transparent 49.5%, rgba(59,130,246,0.04) 49.5%, rgba(59,130,246,0.04) 50.5%, transparent 50.5%);
+    linear-gradient(90deg, transparent 49.5%, rgba(0,229,255,0.03) 49.5%, rgba(0,229,255,0.03) 50.5%, transparent 50.5%),
+    linear-gradient(0deg, transparent 49.5%, rgba(0,229,255,0.03) 49.5%, rgba(0,229,255,0.03) 50.5%, transparent 50.5%);
   background-size: 64px 64px;
 }
 
-.glow-blue { box-shadow: 0 0 60px rgba(37, 99, 235, 0.2), 0 0 120px rgba(37, 99, 235, 0.06); }
-.glow-cyan { box-shadow: 0 0 60px rgba(6, 182, 212, 0.15), 0 0 120px rgba(6, 182, 212, 0.05); }
-.glow-purple { box-shadow: 0 0 40px rgba(139, 92, 246, 0.15); }
+/* Glow effects */
+.glow-cyan { box-shadow: 0 0 50px rgba(0,229,255,0.12), 0 0 100px rgba(0,229,255,0.04); }
+.glow-cyan-strong { box-shadow: 0 0 30px rgba(0,229,255,0.25), 0 0 80px rgba(0,229,255,0.08); }
+.glow-teal { box-shadow: 0 0 40px rgba(0,255,198,0.12), 0 0 80px rgba(0,255,198,0.04); }
+.glow-blue { box-shadow: 0 0 50px rgba(37,99,235,0.15), 0 0 100px rgba(37,99,235,0.05); }
 
+/* Gradient text */
+.gradient-cyan { background: linear-gradient(135deg, #00E5FF, #00FFC6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.gradient-blue-cyan { background: linear-gradient(135deg, #3b82f6, #00E5FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Panel cards */
 .panel {
   background: linear-gradient(135deg, rgba(17,26,46,0.95), rgba(12,18,34,0.98));
-  border: 1px solid rgba(59,130,246,0.1);
+  border: 1px solid rgba(0,229,255,0.08);
   border-radius: 16px;
   backdrop-filter: blur(12px);
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 .panel:hover {
-  border-color: rgba(6,182,212,0.2);
-  box-shadow: 0 0 40px rgba(6,182,212,0.06), 0 16px 48px rgba(0,0,0,0.2);
+  border-color: rgba(0,229,255,0.18);
+  box-shadow: 0 0 30px rgba(0,229,255,0.05), 0 16px 48px rgba(0,0,0,0.2);
   transform: translateY(-2px);
 }
 
-.panel-cyan {
-  background: linear-gradient(135deg, rgba(17,26,46,0.95), rgba(12,18,34,0.98));
-  border: 1px solid rgba(6,182,212,0.15);
-  border-radius: 16px;
+/* Accent button */
+.btn-accent {
+  background: linear-gradient(135deg, #00E5FF, #00d4a6);
+  color: #0c1222;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(0,229,255,0.2);
+}
+.btn-accent:hover {
+  box-shadow: 0 0 30px rgba(0,229,255,0.35);
+  transform: translateY(-1px);
 }
 
-.gradient-text-blue {
-  background: linear-gradient(to right, #3b82f6, #22d3ee);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-purple {
-  background: linear-gradient(to right, #8b5cf6, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Divider with cyan */
+.divider-cyan {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,0.2), transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
