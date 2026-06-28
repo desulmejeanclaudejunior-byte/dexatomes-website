@@ -1,64 +1,83 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { Menu, X, Search } from 'lucide-react'
 
 const links = [
-  { label: 'Services', href: '#services' },
-  { label: 'Products', href: '#products' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Courses', href: '/courses' },
+  { label: 'Store', href: '/store' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 10)
-    window.addEventListener('scroll', fn)
-    return () => window.removeEventListener('scroll', fn)
-  }, [])
+  const pathname = usePathname()
 
   return (
-    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-lg shadow-sm' : 'bg-transparent'}`}>
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5">
+    <nav className="fixed top-0 inset-x-0 z-50 bg-[#0a0f1e]/95 backdrop-blur-xl border-b border-white/[0.06]">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5 shrink-0">
           <div className="bg-blue-600 rounded-lg w-8 h-8 flex items-center justify-center">
-            <span className="text-white font-bold text-xs">DX</span>
+            <span className="text-white font-extrabold text-[11px] tracking-wider">DX</span>
           </div>
-          <span className={`font-semibold text-sm ${scrolled ? 'text-slate-900' : 'text-white'}`}>
-            Dex Atomes
-          </span>
+          <span className="text-white font-bold text-sm tracking-tight hidden sm:block">DEX ATOMES</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        {/* Center nav */}
+        <div className="hidden lg:flex items-center gap-1">
           {links.map(l => (
-            <a key={l.label} href={l.href} className={`text-sm font-medium transition-colors ${scrolled ? 'text-slate-600 hover:text-blue-600' : 'text-white/80 hover:text-white'}`}>
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                pathname === l.href
+                  ? 'text-blue-400 bg-blue-500/10'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a href="#contact" className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors">
-            Get Started
-          </a>
         </div>
 
-        <button onClick={() => setOpen(!open)} className={`md:hidden ${scrolled ? 'text-slate-900' : 'text-white'}`} aria-label="Menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Right */}
+        <div className="flex items-center gap-3">
+          <button className="text-slate-400 hover:text-white p-2 transition-colors hidden md:block" aria-label="Search">
+            <Search size={18} />
+          </button>
+          <Link href="/contact" className="hidden md:inline-flex bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors">
+            Get Started
+          </Link>
+          <button onClick={() => setOpen(!open)} className="lg:hidden text-white p-1" aria-label="Menu">
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
+      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-white border-t border-slate-100 px-6 py-5 shadow-lg">
+        <div className="lg:hidden bg-[#0a0f1e] border-t border-white/[0.06] px-6 py-5">
           {links.map(l => (
-            <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="block py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600">
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className={`block py-2.5 text-sm font-medium transition-colors ${
+                pathname === l.href ? 'text-blue-400' : 'text-slate-400 hover:text-white'
+              }`}
+            >
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a href="#contact" onClick={() => setOpen(false)} className="block mt-3 text-center bg-blue-600 text-white font-semibold py-2.5 rounded-lg text-sm">
+          <Link href="/contact" onClick={() => setOpen(false)} className="block mt-4 text-center bg-blue-600 text-white font-semibold py-2.5 rounded-lg text-sm">
             Get Started
-          </a>
+          </Link>
         </div>
       )}
     </nav>

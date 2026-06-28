@@ -1,82 +1,162 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Code, Cpu, Shield, BookOpen } from 'lucide-react'
+import { ArrowRight, Play, GraduationCap, Users, Award, Layers, MonitorPlay, Terminal, BadgeCheck } from 'lucide-react'
+import Image from 'next/image'
 
-const fade = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
+const fadeUp = (d = 0) => ({
+  initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: 'easeOut' as const },
+  transition: { duration: 0.7, delay: d, ease: 'easeOut' as const },
 })
+
+const stats = [
+  { icon: GraduationCap, value: '12+', label: 'Specialized Courses' },
+  { icon: Users, value: '5K+', label: 'Active Learners' },
+  { icon: Award, value: 'Certified', label: 'Programs' },
+]
+
+const features = [
+  { icon: Layers, title: 'Hands-on Learning', desc: 'Real projects to build concrete skills.' },
+  { icon: MonitorPlay, title: 'Interactive Courses', desc: 'Videos, quizzes, exercises, and challenges.' },
+  { icon: Terminal, title: 'Live Code Editor', desc: 'Write, run, and test code in the browser.' },
+  { icon: BadgeCheck, title: 'Certificates', desc: 'Earn credentials to boost your career.' },
+]
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:48px_48px]" />
+    <>
+      <section className="hero-gradient grid-bg relative overflow-hidden pt-16">
+        {/* Glow orbs */}
+        <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-blue-600/[0.07] rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-blue-500/[0.05] rounded-full blur-[120px]" />
 
-      {/* Glow orbs */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-sky-400/8 rounded-full blur-[100px]" />
+        <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-28">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left text */}
+            <div>
+              <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 mb-8">
+                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                <span className="text-blue-300 text-xs font-semibold tracking-wide">
+                  Learn. Build. Innovate.
+                </span>
+              </motion.div>
 
-      <div className="relative max-w-6xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left */}
-        <div>
-          <motion.div {...fade(0)} className="inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm">
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-            <span className="text-blue-200 text-xs font-medium tracking-wide">Orlando, Florida</span>
-          </motion.div>
+              <motion.h1 {...fadeUp(0.1)} className="text-white text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.08] tracking-tight mb-6">
+                Master Engineering.
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-300">
+                  Build Your Future.
+                </span>
+              </motion.h1>
 
-          <motion.h1 {...fade(0.1)} className="text-white text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.1] tracking-tight mb-6">
-            We build software
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">
-              that moves industries.
-            </span>
-          </motion.h1>
+              <motion.p {...fadeUp(0.2)} className="text-slate-400 text-lg leading-relaxed mb-10 max-w-lg">
+                Dex Atomes is the all-in-one platform to learn real engineering skills through practical courses, real-world projects, and challenging builds.
+              </motion.p>
 
-          <motion.p {...fade(0.2)} className="text-slate-400 text-lg leading-relaxed mb-10 max-w-lg">
-            Dex Atomes LLC delivers web & mobile development, robotics, IT consulting, and engineering education — for startups, businesses, and the next generation of builders.
-          </motion.p>
+              <motion.div {...fadeUp(0.3)} className="flex flex-wrap gap-4 mb-12">
+                <a href="/courses" className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition-all shadow-lg shadow-blue-600/25">
+                  Get Started Free
+                  <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                </a>
+                <a href="/courses" className="inline-flex items-center gap-2 bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 text-white font-medium px-7 py-3.5 rounded-xl text-sm transition-all backdrop-blur-sm">
+                  <Play size={15} />
+                  View Courses
+                </a>
+              </motion.div>
 
-          <motion.div {...fade(0.3)} className="flex flex-wrap gap-4">
-            <a href="#services" className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg transition-all">
-              View Services
-              <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-            </a>
-            <a href="#products" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 border border-white/15 text-white font-medium px-6 py-3 rounded-lg transition-all backdrop-blur-sm">
-              Our Products
-            </a>
-          </motion.div>
+              {/* Stats row */}
+              <motion.div {...fadeUp(0.4)} className="flex gap-8">
+                {stats.map(s => (
+                  <div key={s.label} className="flex items-center gap-3">
+                    <s.icon size={20} className="text-slate-500" />
+                    <div>
+                      <p className="text-white font-bold text-lg leading-none">{s.value}</p>
+                      <p className="text-slate-500 text-xs mt-0.5">{s.label}</p>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Right visual */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, x: 30 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' as const }}
+              className="relative hidden lg:block"
+            >
+              <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl">
+                <Image
+                  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=600&fit=crop"
+                  alt="Robotics engineering"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/80 via-transparent to-transparent" />
+
+                {/* Overlay card */}
+                <div className="absolute bottom-4 left-4 right-4 bg-[#111936]/90 backdrop-blur-md border border-white/10 rounded-xl p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-white text-sm font-semibold">Current Project</p>
+                      <p className="text-slate-400 text-xs mt-0.5">6-Axis Robotic Arm</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-blue-400 text-sm font-bold">72%</p>
+                      <div className="w-20 h-1.5 bg-slate-700 rounded-full mt-1">
+                        <div className="w-[72%] h-full bg-blue-500 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating demo badge */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -right-4 top-8 bg-[#111936]/90 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3 shadow-xl"
+              >
+                <div className="w-10 h-10 bg-blue-600/20 rounded-full flex items-center justify-center">
+                  <Play size={16} className="text-blue-400 ml-0.5" />
+                </div>
+                <div>
+                  <p className="text-white text-xs font-semibold">Watch Demo</p>
+                  <p className="text-slate-500 text-[10px]">1:45</p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Right — feature grid */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="hidden lg:grid grid-cols-2 gap-3"
-        >
-          {[
-            { icon: Code, label: 'Software Development', desc: 'Web, mobile & custom platforms' },
-            { icon: Cpu, label: 'Robotics & IoT', desc: 'Arduino, ESP32, automation' },
-            { icon: Shield, label: 'IT Security', desc: 'Network protection & audits' },
-            { icon: BookOpen, label: 'Education', desc: 'DexusLab & Robotique Moderne' },
-          ].map((item, i) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-              className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08] backdrop-blur-md rounded-2xl p-5 transition-colors cursor-default"
-            >
-              <item.icon size={22} className="text-blue-400 mb-3" />
-              <p className="text-white font-semibold text-sm mb-1">{item.label}</p>
-              <p className="text-slate-500 text-xs">{item.desc}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+        {/* Feature bar */}
+        <div className="relative border-t border-white/[0.06]">
+          <div className="max-w-7xl mx-auto px-6 py-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map((f, i) => (
+                <motion.div
+                  key={f.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 + i * 0.1, duration: 0.5, ease: 'easeOut' as const }}
+                  className="flex items-start gap-4"
+                >
+                  <div className="w-11 h-11 bg-blue-600/10 border border-blue-500/20 rounded-xl flex items-center justify-center shrink-0">
+                    <f.icon size={18} className="text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-sm">{f.title}</p>
+                    <p className="text-slate-500 text-xs mt-0.5 leading-relaxed">{f.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }

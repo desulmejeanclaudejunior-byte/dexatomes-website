@@ -1,17 +1,48 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-navy: #0f172a;
-  --color-blue: #2563eb;
-  --color-blue-light: #3b82f6;
-  --color-sky: #0ea5e9;
+  --color-primary: #1d4ed8;
+  --color-primary-light: #3b82f6;
+  --color-primary-dark: #1e3a8a;
+  --color-accent: #2563eb;
+  --color-navy: #0a0f1e;
+  --color-navy-light: #111936;
+  --color-navy-mid: #151d3b;
+  --color-surface: #1a2342;
+  --color-surface-light: #1f2b4d;
   --color-page: #f8fafc;
-  --color-card: #ffffff;
 }
 
 html { scroll-behavior: smooth; }
 
-::selection {
-  background: #2563eb;
-  color: white;
+::selection { background: #2563eb; color: white; }
+
+.hero-gradient {
+  background: linear-gradient(135deg, #0a0f1e 0%, #111936 40%, #0d1530 100%);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.glow-blue {
+  box-shadow: 0 0 80px rgba(37, 99, 235, 0.25), 0 0 160px rgba(37, 99, 235, 0.1);
+}
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
