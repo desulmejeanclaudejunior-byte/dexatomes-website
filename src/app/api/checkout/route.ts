@@ -1,12 +1,22 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2026-06-24.dahlia',
-})
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+    apiVersion: '2026-06-24.dahlia',
+  })
+}
 
 export async function POST() {
+  if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY === 'sk_live_REPLACE_ME') {
+    return NextResponse.json(
+      { error: 'Stripe is not configured yet' },
+      { status: 503 }
+    )
+  }
+
   try {
+    const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
