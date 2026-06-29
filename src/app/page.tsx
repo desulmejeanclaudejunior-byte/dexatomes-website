@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ArrowRight, Eye, Mail, Phone, MapPin, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, Send } from 'lucide-react'
 import { useState } from 'react'
 
 const fade = (d = 0) => ({
@@ -25,69 +25,33 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ═══ HERO — Direct from mockup ═══ */}
+      {/* ═══ HERO ═══ */}
       <section className="relative mt-[72px]">
-        <div className="relative w-full">
-          <Image
-            src="/hero-bg.png"
-            alt="Dex Atomes — Digital Solutions Built for the Future"
-            width={1536}
-            height={430}
-            className="w-full h-auto"
-            priority
-          />
-          {/* Clickable overlay areas */}
-          <Link href="/services" className="absolute left-[4%] bottom-[28%] w-[12%] h-[12%] rounded-xl hover:bg-white/10 transition-colors" aria-label="Explore Services" />
-          <Link href="/store" className="absolute left-[18%] bottom-[28%] w-[12%] h-[12%] rounded-xl hover:bg-white/10 transition-colors" aria-label="View Our Work" />
-        </div>
+        <Image src="/hero-bg.png" alt="Dex Atomes — Engineering Solutions Built for the Future" width={1536} height={345} className="w-full h-auto" priority />
+        <Link href="/services" className="absolute left-[4%] bottom-[18%] w-[11%] h-[14%] rounded-xl hover:bg-white/10 transition-colors" aria-label="Explore Services" />
+        <Link href="/store" className="absolute left-[17%] bottom-[18%] w-[10%] h-[14%] rounded-xl hover:bg-white/10 transition-colors" aria-label="Visit Bookstore" />
       </section>
 
-      {/* ═══ SERVICES — Direct from mockup ═══ */}
+      {/* ═══ SERVICES ═══ */}
       <section className="relative">
-        <div className="relative w-full">
-          <Image
-            src="/services-section.png"
-            alt="Our Services — Website Development, Mobile App Development, Bookstore"
-            width={1536}
-            height={310}
-            className="w-full h-auto"
-          />
-          {/* Clickable service cards */}
-          <Link href="/services" className="absolute left-[2%] top-[30%] w-[30%] h-[65%] rounded-2xl hover:bg-blue-600/5 transition-colors" aria-label="Website Development" />
-          <Link href="/services" className="absolute left-[35%] top-[30%] w-[30%] h-[65%] rounded-2xl hover:bg-blue-600/5 transition-colors" aria-label="Mobile App Development" />
-          <Link href="/store" className="absolute left-[68%] top-[30%] w-[30%] h-[65%] rounded-2xl hover:bg-blue-600/5 transition-colors" aria-label="Bookstore" />
-        </div>
+        <Image src="/services-section.png" alt="Our Services — Website Development, Mobile App Development, Engineering Education" width={1536} height={315} className="w-full h-auto" />
+        <Link href="/services" className="absolute left-[1%] top-[28%] w-[31%] h-[68%] rounded-2xl hover:bg-blue-600/[0.03] transition-colors" aria-label="Website Development" />
+        <Link href="/services" className="absolute left-[34%] top-[28%] w-[31%] h-[68%] rounded-2xl hover:bg-blue-600/[0.03] transition-colors" aria-label="Mobile App Development" />
+        <Link href="/store" className="absolute left-[67%] top-[28%] w-[31%] h-[68%] rounded-2xl hover:bg-blue-600/[0.03] transition-colors" aria-label="Engineering Education" />
       </section>
 
-      {/* ═══ BOOKS ROW — Direct from mockup ═══ */}
+      {/* ═══ BOOKS ═══ */}
       <section className="relative">
-        <div className="relative w-full">
-          <Image
-            src="/books-section.png"
-            alt="Featured Books — Engineering Library"
-            width={1536}
-            height={135}
-            className="w-full h-auto"
-          />
-          <Link href="/store" className="absolute right-[2%] top-[15%] w-[18%] h-[70%] rounded-xl hover:bg-blue-600/10 transition-colors" aria-label="Explore All Books" />
-        </div>
+        <Image src="/books-section.png" alt="Featured Book: Robotique Moderne — Coming Soon: Arduino Mastery, ESP32 In Action, Drone Technology" width={1536} height={205} className="w-full h-auto" />
+        <Link href="/store" className="absolute left-[28%] top-[30%] w-[10%] h-[30%] rounded-lg hover:bg-blue-600/10 transition-colors" aria-label="Buy Robotique Moderne" />
       </section>
 
-      {/* ═══ STATS BAR — Direct from mockup ═══ */}
+      {/* ═══ STATS BAR ═══ */}
       <section className="relative">
-        <div className="relative w-full">
-          <Image
-            src="/stats-bar.png"
-            alt="50+ Happy Clients, 100+ Projects, 5+ Years, Worldwide"
-            width={1536}
-            height={104}
-            className="w-full h-auto"
-          />
-          <Link href="/contact" className="absolute right-[2%] top-[20%] w-[10%] h-[60%] rounded-lg hover:bg-white/10 transition-colors" aria-label="Get in Touch" />
-        </div>
+        <Image src="/stats-bar.png" alt="Engineering Expertise, Modern Technologies, Practical Solutions, Long-Term Support, Based in Orlando" width={1536} height={139} className="w-full h-auto" />
       </section>
 
-      {/* ═══ CONTACT — Real working form ═══ */}
+      {/* ═══ CONTACT FORM ═══ */}
       <section className="py-20 bg-[#f0f4ff]">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fade()} className="text-center mb-14">
