@@ -1,20 +1,20 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 
-const font = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600', '700'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dexatomes.com'),
-  title: { default: 'Dex Atomes LLC', template: '%s — Dex Atomes' },
-  description: 'Technology. Education. Innovation. Software, robotics, IT consulting & engineering education.',
+  title: { default: 'Dex Atomes LLC — Build · Learn · Innovate', template: '%s | Dex Atomes' },
+  description: 'Digital solutions built for the future. Web development, mobile apps, robotics, engineering education. Orlando, FL.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={font.className}>
-      <body className="antialiased bg-[#0c1222] text-white min-h-screen">
+    <html lang="en" className={inter.className}>
+      <body className="antialiased bg-white text-slate-800">
         <Navbar />
         <main>{children}</main>
       </body>
