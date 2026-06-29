@@ -182,7 +182,8 @@ export default function HomePage() {
                   <span className="flex items-center gap-1"><Rocket size={12} className="text-blue-400" /> Real Projects</span>
                   <span className="flex items-center gap-1"><Heart size={12} className="text-blue-400" /> Illustrated</span>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="text-white text-2xl font-bold">$19.99</span>
                   <Link href="/store" className="inline-flex items-center gap-1.5 bg-[#1a3ab5] hover:bg-[#2348c7] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-lg shadow-blue-900/30">
                     Buy Now <ArrowRight size={13} />
                   </Link>
@@ -191,15 +192,10 @@ export default function HomePage() {
                   </Link>
                 </div>
               </div>
-              {/* Book visual */}
+              {/* Real book cover */}
               <div className="shrink-0 w-40 hidden sm:block">
                 <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden border border-blue-900/30 shadow-2xl shadow-blue-900/40">
-                  <Image src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&h=450&fit=crop" alt="Robotique Moderne" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#060e24]/80 to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <p className="text-white font-bold text-[10px] uppercase tracking-wider">Robotique</p>
-                    <p className="text-blue-300 font-bold text-[10px] uppercase tracking-wider">Moderne</p>
-                  </div>
+                  <Image src="/book-cover-sm.jpg" alt="Robotique Moderne — Guide Complet pour Débutants" fill className="object-cover" />
                 </div>
               </div>
             </motion.div>
