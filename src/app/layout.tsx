@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://dexatomes.com'),
   title: { default: 'Dex Atomes LLC — Build · Learn · Innovate', template: '%s | Dex Atomes' },
-  description: 'Digital solutions built for the future. Web development, mobile apps, robotics, engineering education. Orlando, FL.',
+  description: 'Digital solutions built for the future. Web, mobile, robotics, engineering education. Orlando, FL.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

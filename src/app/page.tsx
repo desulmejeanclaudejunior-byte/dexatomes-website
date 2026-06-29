@@ -3,7 +3,12 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Eye, Globe, Smartphone, BookOpen, ShoppingCart, MapPin, Mail, Phone, Send, ChevronRight, Users, Briefcase, Clock, Award } from 'lucide-react'
+import {
+  ArrowRight, Eye, Globe, Smartphone, BookOpen, ShoppingCart,
+  MapPin, Mail, Phone, Send, ChevronRight, ChevronLeft,
+  Users, Briefcase, Clock, Award, Lightbulb, Shield, Heart, Zap,
+  CheckCircle2, Monitor, Cpu
+} from 'lucide-react'
 import { useState } from 'react'
 
 const fade = (d = 0) => ({
@@ -25,244 +30,248 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ═══ HERO — Dark blue, robotic arm, DX watermark ═══ */}
-      <section className="hero-bg circuit-dots relative overflow-hidden pt-16">
-        <div className="absolute inset-0 opacity-10">
-          <Image src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1920&h=900&fit=crop" alt="" fill className="object-cover" priority />
+      {/* ═══ HERO ═══ */}
+      <section className="relative min-h-[600px] bg-gradient-to-br from-[#0a1033] via-[#101845] to-[#0d1540] overflow-hidden mt-[72px]">
+        {/* Circuit dot pattern */}
+        <div className="absolute inset-0" style={{backgroundImage:'radial-gradient(circle,rgba(26,58,181,0.08) 1px,transparent 0)',backgroundSize:'24px 24px'}} />
+
+        {/* Robotic arm background */}
+        <div className="absolute right-0 top-0 bottom-0 w-[60%] hidden lg:block">
+          <Image src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=800&fit=crop" alt="" fill className="object-cover opacity-30" priority />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1033] via-[#0a1033]/70 to-transparent" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1033]/95 via-[#0a1033]/80 to-[#0a1033]/60" />
+
+        {/* Code text overlay (decorative) */}
+        <div className="absolute right-8 top-20 text-[11px] font-mono text-blue-400/20 leading-relaxed hidden xl:block select-none">
+          {'function DexAtomes() {'}<br />
+          {'  let ideas = {'}<br />
+          {'    success: true,'}<br />
+          {'    innovation: true,'}<br />
+          {'  };'}<br />
+          {'  return solutions;'}<br />
+          {'}'}<br />
+          {'// Building the future'}
+        </div>
 
         {/* DX watermark */}
-        <div className="absolute right-10 top-1/2 -translate-y-1/2 text-[20rem] font-black text-white/[0.03] tracking-widest select-none pointer-events-none hidden lg:block">
+        <div className="absolute right-[15%] top-1/2 -translate-y-1/2 text-[18rem] font-black text-white/[0.04] tracking-wider select-none pointer-events-none hidden lg:block">
           DX
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-28">
-          <div className="max-w-2xl">
+          <div className="max-w-xl">
             <motion.p {...fade(0)} className="text-blue-300 text-sm font-semibold tracking-wider uppercase mb-4">
-              Website · Mobile Apps · Robotics
+              Innovate. Build. Empower.
             </motion.p>
 
-            <motion.h1 {...fade(0.1)} className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight mb-6">
+            <motion.h1 {...fade(0.1)} className="text-white text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.08] tracking-tight mb-2">
               Digital Solutions
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
-                Built for the Future
-              </span>
+            </motion.h1>
+            <motion.h1 {...fade(0.15)} className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 text-4xl sm:text-5xl lg:text-[3.5rem] font-bold italic leading-[1.08] tracking-tight mb-6">
+              Built for the Future
             </motion.h1>
 
-            <motion.p {...fade(0.2)} className="text-slate-400 text-lg leading-relaxed mb-10 max-w-xl">
+            <motion.p {...fade(0.2)} className="text-slate-400 text-base leading-relaxed mb-8 max-w-lg">
               Dex Atomes LLC helps businesses and individuals turn ideas into powerful digital experiences. We build websites, mobile applications, and provide knowledge through our engineering books.
             </motion.p>
 
-            <motion.div {...fade(0.3)} className="flex flex-wrap gap-4">
-              <Link href="/services" className="btn-brand inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-[15px]">
+            <motion.div {...fade(0.3)} className="flex flex-wrap gap-4 mb-12">
+              <Link href="/services" className="inline-flex items-center gap-2 bg-[#1a3ab5] hover:bg-[#152d91] text-white font-semibold px-7 py-3.5 rounded-xl text-[15px] transition-colors shadow-lg shadow-blue-900/30">
                 Explore Services <ArrowRight size={16} />
               </Link>
-              <Link href="/store" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl text-[15px] transition-all">
-                <Eye size={16} /> View Our Work
+              <Link href="/store" className="inline-flex items-center gap-2 bg-transparent border-2 border-white/30 hover:border-white/50 text-white font-semibold px-7 py-3.5 rounded-xl text-[15px] transition-all">
+                View Our Work <ArrowRight size={16} />
               </Link>
+            </motion.div>
+
+            {/* Trust badges */}
+            <motion.div {...fade(0.4)} className="flex flex-wrap gap-6">
+              {[
+                { icon: Lightbulb, label: 'Innovative', sub: 'Solutions' },
+                { icon: Shield, label: 'Reliable &', sub: 'Secure' },
+                { icon: Heart, label: 'Client', sub: 'Focused' },
+                { icon: Zap, label: 'Fast &', sub: 'Efficient' },
+              ].map(b => (
+                <div key={b.label} className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
+                    <b.icon size={18} className="text-blue-300" />
+                  </div>
+                  <div>
+                    <p className="text-white text-xs font-semibold leading-tight">{b.label}</p>
+                    <p className="text-slate-400 text-xs leading-tight">{b.sub}</p>
+                  </div>
+                </div>
+              ))}
             </motion.div>
           </div>
         </div>
-
-        {/* Bottom gradient fade */}
-        <div className="h-16 bg-gradient-to-b from-transparent to-white" />
       </section>
 
-      {/* ═══ OUR SERVICES — White bg, 3 cards with images ═══ */}
+      {/* ═══ OUR SERVICES ═══ */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fade()} className="text-center mb-14">
-            <p className="text-[#1a3ab5] text-sm font-semibold tracking-wider uppercase mb-2">Our Services</p>
-            <h2 className="text-slate-900 text-3xl md:text-4xl font-bold tracking-tight">What we offer</h2>
+            <p className="text-[#1a3ab5] text-xs font-semibold tracking-[3px] uppercase mb-2">What We Do</p>
+            <h2 className="text-slate-900 text-3xl md:text-4xl font-bold tracking-tight">Our Services</h2>
+            <div className="w-12 h-1 bg-[#1a3ab5] mx-auto mt-4 rounded-full" />
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid lg:grid-cols-3 gap-7">
             {[
               {
-                icon: Globe, title: 'Website Development',
-                desc: 'Professional websites, web applications, SaaS platforms, and e-commerce solutions built with modern technologies.',
-                image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop',
+                icon: Monitor, title: 'Website Development',
+                desc: 'We design and develop modern, responsive websites that represent your brand and drive results.',
+                checks: ['Custom Design', 'Responsive Layout', 'SEO Optimized', 'Fast & Secure'],
+                image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=240&fit=crop',
+                link: '/services',
+                linkText: 'Learn More',
               },
               {
                 icon: Smartphone, title: 'Mobile App Development',
-                desc: 'Native-quality iOS and Android applications. React Native, cross-platform development with Firebase backend.',
-                image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop',
+                desc: 'We build high-performance mobile applications for iOS and Android tailored to your needs.',
+                checks: ['iOS & Android Apps', 'User Friendly UI/UX', 'Scalable Solutions', 'API Integration'],
+                image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=240&fit=crop',
+                link: '/services',
+                linkText: 'Learn More',
               },
               {
                 icon: BookOpen, title: 'Bookstore',
-                desc: 'Engineering ebooks and technical guides — robotics, Arduino, ESP32, drones, AI. Written by engineers for engineers.',
-                image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop',
+                desc: 'Explore our collection of engineering and robotics books to learn, build and innovate.',
+                checks: ['Engineering Books', 'Robotics & Automation', 'Practical Guides', 'Digital & Print'],
+                image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=240&fit=crop',
+                link: '/store',
+                linkText: 'Visit Bookstore',
               },
             ].map((s, i) => (
               <motion.div key={s.title} {...fade(i * 0.1)}
-                className="group bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <Image src={s.image} alt={s.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3 w-10 h-10 bg-[#1a3ab5] rounded-xl flex items-center justify-center shadow-lg">
-                    <s.icon size={18} className="text-white" />
-                  </div>
-                </div>
+                className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className="p-6">
-                  <h3 className="text-slate-900 font-bold text-lg mb-2">{s.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ BOOKSTORE ROW — Dark blue bg, book covers ═══ */}
-      <section className="hero-bg circuit-dots py-16 relative overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-6">
-          <motion.div {...fade()} className="flex items-center justify-between mb-10">
-            <div>
-              <p className="text-blue-300 text-sm font-semibold tracking-wider uppercase mb-1">Bookstore</p>
-              <h2 className="text-white text-2xl md:text-3xl font-bold tracking-tight">Engineering Library</h2>
-            </div>
-            <Link href="/store" className="group hidden sm:inline-flex items-center gap-1 text-blue-300 font-semibold text-sm hover:text-white transition-colors">
-              View All <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          </motion.div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-            {[
-              { title: 'Arduino Essentials', price: '$24.99', tag: 'Coming Soon', img: 'https://images.unsplash.com/photo-1553406830-ef2513450d76?w=300&h=400&fit=crop' },
-              { title: 'ESP32 Projects', price: '$24.99', tag: 'Coming Soon', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=400&fit=crop' },
-              { title: 'Drone Engineering', price: '$34.99', tag: 'Coming Soon', img: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=300&h=400&fit=crop' },
-              { title: 'Robotique Moderne', price: '$22.99', tag: 'Available', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&h=400&fit=crop' },
-              { title: 'AI & ML Guide', price: '$29.99', tag: 'Coming Soon', img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=300&h=400&fit=crop' },
-            ].map((book, i) => (
-              <motion.div key={book.title} {...fade(i * 0.08)}>
-                <Link href="/store" className="group block">
-                  <div className="relative rounded-xl overflow-hidden border border-white/10 mb-3">
-                    <Image src={book.img} alt={book.title} width={300} height={400} className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a1033] via-transparent to-transparent" />
-                    <span className={`absolute top-2 left-2 text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded ${
-                      book.tag === 'Available' ? 'bg-blue-600 text-white' : 'bg-white/15 text-white/80'
-                    }`}>{book.tag}</span>
-                  </div>
-                  <p className="text-white font-semibold text-sm">{book.title}</p>
-                  <p className="text-blue-300 font-bold text-sm mt-0.5">{book.price}</p>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ STATS BAR ═══ */}
-      <section className="bg-[#1a3ab5] py-8">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { icon: Briefcase, value: '50+', label: 'Projects Delivered' },
-              { icon: Users, value: '100+', label: 'Happy Clients' },
-              { icon: Clock, value: '5+', label: 'Years Experience' },
-              { icon: Award, value: 'Worldwide', label: 'Service Reach' },
-            ].map((s, i) => (
-              <motion.div key={s.label} {...fade(i * 0.08)} className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
-                  <s.icon size={22} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-white text-2xl font-bold">{s.value}</p>
-                  <p className="text-blue-200 text-xs">{s.label}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ CONTACT ═══ */}
-      <section className="py-20 bg-[#f0f4ff]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <motion.div {...fade()}>
-              <p className="text-[#1a3ab5] text-sm font-semibold tracking-wider uppercase mb-2">Have a project in mind?</p>
-              <h2 className="text-slate-900 text-3xl font-bold tracking-tight mb-6">Let&#39;s build together</h2>
-              <p className="text-slate-500 leading-relaxed mb-8">
-                Whether you need a website, mobile app, engineering consultation, or want to explore our books and courses — we&#39;re ready to help.
-              </p>
-              <div className="space-y-4">
-                {[
-                  { icon: Mail, label: 'support@dexuslab.com' },
-                  { icon: Phone, label: '(863) 207-8619' },
-                  { icon: MapPin, label: 'Orlando, Florida, USA' },
-                ].map(c => (
-                  <div key={c.label} className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#1a3ab5]/10 rounded-lg flex items-center justify-center shrink-0">
-                      <c.icon size={18} className="text-[#1a3ab5]" />
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 bg-[#1a3ab5]/10 rounded-xl flex items-center justify-center shrink-0">
+                      <s.icon size={22} className="text-[#1a3ab5]" />
                     </div>
-                    <span className="text-slate-700 text-sm font-medium">{c.label}</span>
+                    <div>
+                      <h3 className="text-slate-900 font-bold text-lg">{s.title}</h3>
+                      <p className="text-slate-500 text-sm mt-1 leading-relaxed">{s.desc}</p>
+                    </div>
                   </div>
+
+                  <div className="relative h-40 rounded-xl overflow-hidden mb-4">
+                    <Image src={s.image} alt={s.title} fill className="object-cover" />
+                  </div>
+
+                  <ul className="space-y-2 mb-4">
+                    {s.checks.map(c => (
+                      <li key={c} className="flex items-center gap-2 text-sm text-slate-600">
+                        <CheckCircle2 size={14} className="text-[#1a3ab5] shrink-0" />
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link href={s.link} className="inline-flex items-center gap-1 text-[#1a3ab5] text-sm font-semibold hover:gap-2 transition-all">
+                    {s.linkText} <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ FEATURED BOOKS ═══ */}
+      <section className="py-14 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-start gap-6">
+            {/* Left label */}
+            <div className="shrink-0 hidden md:block">
+              <p className="text-[#1a3ab5] text-[10px] font-bold tracking-[3px] uppercase mb-1">Featured</p>
+              <p className="text-[#1a3ab5] text-[10px] font-bold tracking-[3px] uppercase">Books</p>
+            </div>
+
+            {/* Books scroll */}
+            <div className="flex-1 overflow-x-auto">
+              <div className="flex gap-5 pb-2">
+                {[
+                  { title: 'Robotique Moderne', sub: 'Modern Robotics\nComplete Guide', price: '$29.99', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&h=260&fit=crop' },
+                  { title: 'Arduino Mastery', sub: 'Arduino\nMastery', price: '$24.99', img: 'https://images.unsplash.com/photo-1553406830-ef2513450d76?w=200&h=260&fit=crop' },
+                  { title: 'ESP32 in Action', sub: 'ESP32\nIn Action', price: '$24.99', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200&h=260&fit=crop' },
+                  { title: 'Drone Technology', sub: 'Drone\nTechnology', price: '$22.99', img: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=200&h=260&fit=crop' },
+                ].map((book, i) => (
+                  <motion.div key={book.title} {...fade(i * 0.08)} className="shrink-0 w-44">
+                    <Link href="/store" className="group block">
+                      <div className="relative h-52 rounded-xl overflow-hidden mb-2 shadow-md">
+                        <Image src={book.img} alt={book.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1033]/70 to-transparent" />
+                        <div className="absolute bottom-2 left-2 right-2">
+                          <p className="text-white font-bold text-[11px] uppercase tracking-wide leading-tight whitespace-pre-line">{book.sub}</p>
+                        </div>
+                      </div>
+                      <p className="text-slate-900 font-bold text-sm">{book.price}</p>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div {...fade(0.1)}>
-              {sent ? (
-                <div className="bg-white rounded-2xl border border-slate-100 p-10 text-center shadow-sm">
-                  <Send size={32} className="text-[#1a3ab5] mx-auto mb-4" />
-                  <h3 className="text-slate-900 text-xl font-bold mb-2">Message sent!</h3>
-                  <p className="text-slate-500 text-sm">We&#39;ll respond within 24 hours.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-100 p-8 shadow-sm space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-600 mb-1.5">Name</label>
-                      <input name="name" required placeholder="Your name" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20 transition-all" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-600 mb-1.5">Email</label>
-                      <input name="email" type="email" required placeholder="you@email.com" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20 transition-all" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">Service</label>
-                    <select name="service" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20 transition-all">
-                      <option>Website Development</option>
-                      <option>Mobile App Development</option>
-                      <option>Robotics & Engineering</option>
-                      <option>Technical Consulting</option>
-                      <option>Bookstore Inquiry</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">Message</label>
-                    <textarea name="message" rows={4} placeholder="Tell us about your project..." className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20 transition-all resize-none" />
-                  </div>
-                  <button type="submit" className="w-full btn-brand py-3 rounded-lg text-sm">Send Message</button>
-                </form>
-              )}
+            {/* Right — Knowledge card */}
+            <motion.div {...fade(0.2)} className="shrink-0 w-64 bg-[#1a3ab5] rounded-2xl p-6 hidden lg:block">
+              <BookOpen size={28} className="text-white mb-3" />
+              <h3 className="text-white font-bold text-lg mb-2">Knowledge Empowers</h3>
+              <p className="text-blue-200 text-xs leading-relaxed mb-4">
+                Our books are written for students, engineers, and makers who want to turn knowledge into real-world solutions.
+              </p>
+              <Link href="/store" className="inline-flex items-center gap-1.5 bg-white text-[#1a3ab5] text-xs font-semibold px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+                Explore All Books <ArrowRight size={12} />
+              </Link>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STATS + CTA BAR ═══ */}
+      <section className="bg-[#0a1033] py-8 border-t-4 border-[#1a3ab5]">
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-between gap-6">
+          {[
+            { icon: Users, value: '50+', label: 'Happy Clients' },
+            { icon: Briefcase, value: '100+', label: 'Projects Completed' },
+            { icon: Cpu, value: '5+', label: 'Years of Experience' },
+            { icon: Globe, value: 'Worldwide', label: 'Clients & Customers' },
+          ].map((s, i) => (
+            <motion.div key={s.label} {...fade(i * 0.08)} className="flex items-center gap-3">
+              <s.icon size={24} className="text-blue-400" />
+              <div>
+                <p className="text-white text-xl font-bold">{s.value}</p>
+                <p className="text-slate-500 text-xs">{s.label}</p>
+              </div>
+            </motion.div>
+          ))}
+
+          <div className="flex items-center gap-4">
+            <div>
+              <p className="text-white font-bold text-sm">Have a project in mind?</p>
+              <p className="text-slate-500 text-xs">Let&#39;s build something amazing together.</p>
+            </div>
+            <Link href="/contact" className="inline-flex items-center gap-1.5 bg-white text-[#0a1033] text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-slate-100 transition-colors shrink-0">
+              Get in Touch <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="bg-[#0a1033] py-10 px-6 border-t border-white/[0.05]">
+      <footer className="bg-[#060b20] py-10 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <Image src="/logo.png" alt="Dex Atomes" width={120} height={30} className="h-7 w-auto opacity-80" />
-            <span className="text-slate-600 text-xs">© 2026 Dex Atomes LLC · Orlando, FL</span>
+            <Image src="/logo.png" alt="Dex Atomes" width={120} height={30} className="h-8 w-auto brightness-200" />
+            <span className="text-slate-600 text-xs">© 2026 Dex Atomes LLC</span>
           </div>
           <div className="flex gap-5 flex-wrap justify-center">
-            {[
-              { label: 'Services', href: '/services' },
-              { label: 'Bookstore', href: '/store' },
-              { label: 'DexusLab', href: 'https://dexuslab.com' },
-              { label: '@DexAtomes', href: 'https://instagram.com/DexAtomes' },
-              { label: 'Contact', href: '/contact' },
-            ].map(l => (
-              <Link key={l.label} href={l.href} className="text-slate-500 hover:text-white text-xs transition-colors">{l.label}</Link>
+            {['Services', 'Bookstore', 'About', 'Contact'].map(l => (
+              <Link key={l} href={`/${l.toLowerCase()}`} className="text-slate-500 hover:text-white text-xs transition-colors">{l}</Link>
             ))}
+            <a href="https://dexuslab.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white text-xs transition-colors">DexusLab</a>
+            <a href="mailto:support@dexuslab.com" className="text-slate-500 hover:text-white text-xs transition-colors">support@dexuslab.com</a>
           </div>
         </div>
       </footer>
