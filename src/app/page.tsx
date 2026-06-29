@@ -33,63 +33,60 @@ export default function HomePage() {
           HERO — Real mockup bg + coded text overlay
       ══════════════════════════════════════════════ */}
       <section className="relative overflow-hidden mt-[72px]">
-        {/* Your exact mockup as background */}
-        <div className="relative w-full">
-          <Image src="/hero-bg.png" alt="" width={1536} height={345} className="w-full h-auto min-h-[400px] object-cover" priority />
+        {/* Mockup as bg — covers full section, positioned to show robotic arm */}
+        <div className="absolute inset-0">
+          <Image src="/hero-bg.png" alt="" fill className="object-cover object-right" priority />
+          {/* Overlay: stronger on mobile so text is readable */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060e24] via-[#060e24]/90 to-[#060e24]/40 lg:from-[#060e24]/95 lg:via-[#060e24]/75 lg:to-transparent" />
+        </div>
 
-          {/* Gradient overlay on left to place real text */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060e24]/95 via-[#060e24]/80 to-transparent" />
+        {/* Real content */}
+        <div className="relative max-w-7xl mx-auto px-6 py-16 sm:py-20 lg:py-28">
+          <div className="max-w-xl">
+            <motion.p {...fade(0)} className="text-blue-400 text-xs font-bold tracking-[3px] uppercase mb-4">
+              Build. Learn. Innovate.
+            </motion.p>
 
-          {/* Real coded content on top */}
-          <div className="absolute inset-0 flex items-center">
-            <div className="max-w-7xl mx-auto px-6 w-full">
-              <div className="max-w-xl">
-                <motion.p {...fade(0)} className="text-blue-400 text-xs font-bold tracking-[3px] uppercase mb-4">
-                  Build. Learn. Innovate.
-                </motion.p>
+            <motion.div {...fade(0.1)}>
+              <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.08] tracking-tight">
+                Engineering Solutions
+              </h1>
+              <h1 className="text-blue-400 text-3xl sm:text-4xl lg:text-5xl font-bold italic leading-[1.08] tracking-tight mt-1 mb-5">
+                Built for the Future
+              </h1>
+            </motion.div>
 
-                <motion.div {...fade(0.1)}>
-                  <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.08] tracking-tight">
-                    Engineering Solutions
-                  </h1>
-                  <h1 className="text-blue-400 text-3xl sm:text-4xl lg:text-5xl font-bold italic leading-[1.08] tracking-tight mt-1 mb-5">
-                    Built for the Future
-                  </h1>
-                </motion.div>
+            <motion.p {...fade(0.2)} className="text-slate-300 text-sm sm:text-[15px] leading-relaxed mb-7 max-w-md">
+              Dex Atomes LLC designs websites, develops mobile applications, and publishes engineering books for innovators, students, and businesses.
+            </motion.p>
 
-                <motion.p {...fade(0.2)} className="text-slate-300 text-sm leading-relaxed mb-7 max-w-md">
-                  Dex Atomes LLC designs websites, develops mobile applications, and publishes engineering books for innovators, students, and businesses.
-                </motion.p>
+            <motion.div {...fade(0.3)} className="flex flex-wrap gap-3 mb-10">
+              <Link href="/services" className="group inline-flex items-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-lg shadow-blue-900/30">
+                Explore Services <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="/store" className="inline-flex items-center gap-2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/20 text-white font-medium px-5 py-2.5 rounded-lg text-sm transition-all">
+                <ShoppingCart size={14} /> Visit Bookstore
+              </Link>
+            </motion.div>
 
-                <motion.div {...fade(0.3)} className="flex flex-wrap gap-3 mb-8">
-                  <Link href="/services" className="group inline-flex items-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold px-5 py-2.5 rounded-lg text-sm transition-all shadow-lg shadow-blue-900/30">
-                    Explore Services <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
-                  <Link href="/store" className="inline-flex items-center gap-2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/20 text-white font-medium px-5 py-2.5 rounded-lg text-sm transition-all">
-                    <ShoppingCart size={14} /> Visit Bookstore
-                  </Link>
-                </motion.div>
-
-                <motion.div {...fade(0.4)} className="flex flex-wrap gap-5">
-                  {[
-                    { icon: Settings, label: 'Engineering', sub: 'Focused' },
-                    { icon: Zap, label: 'Custom', sub: 'Solutions' },
-                    { icon: Users, label: 'Client', sub: 'Focused' },
-                    { icon: Globe, label: 'Serving Clients', sub: 'Worldwide' },
-                  ].map(b => (
-                    <div key={b.label} className="flex items-center gap-2">
-                      <div className="w-9 h-9 bg-white/[0.06] border border-white/[0.08] rounded-lg flex items-center justify-center">
-                        <b.icon size={15} className="text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-white text-[11px] font-semibold leading-tight">{b.label}</p>
-                        <p className="text-slate-500 text-[10px] leading-tight">{b.sub}</p>
-                      </div>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
-            </div>
+            <motion.div {...fade(0.4)} className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-5">
+              {[
+                { icon: Settings, label: 'Engineering', sub: 'Focused' },
+                { icon: Zap, label: 'Custom', sub: 'Solutions' },
+                { icon: Users, label: 'Client', sub: 'Focused' },
+                { icon: Globe, label: 'Serving Clients', sub: 'Worldwide' },
+              ].map(b => (
+                <div key={b.label} className="flex items-center gap-2">
+                  <div className="w-9 h-9 bg-white/[0.06] border border-white/[0.08] rounded-lg flex items-center justify-center shrink-0">
+                    <b.icon size={15} className="text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="text-white text-[11px] font-semibold leading-tight">{b.label}</p>
+                    <p className="text-slate-500 text-[10px] leading-tight">{b.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
