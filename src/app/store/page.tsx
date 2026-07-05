@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { ShoppingCart, ArrowRight, CheckCircle2, Bell, Download, BookOpen, Wrench, Rocket, Heart } from 'lucide-react'
 
 const books = [
-  { title: 'Robotique Moderne', sub: 'Complete Robotics Guide · French', price: '$19.99', tag: 'Available', img: '/book-cover-sm.jpg', real: true },
+  { title: 'Robotique Moderne', sub: 'Complete Robotics Guide · French', price: '$9.99', tag: 'Available', img: '/representation.png', real: true },
   { title: 'Arduino Mastery', sub: 'Fundamentals & Projects', price: '$19.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1553406830-ef2513450d76?w=400&h=520&fit=crop', real: false },
   { title: 'ESP32 In Action', sub: 'Advanced IoT Guide', price: '$19.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=520&fit=crop', real: false },
   { title: 'Drone Technology', sub: 'Build & Program Drones', price: '$24.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400&h=520&fit=crop', real: false },
@@ -56,17 +56,25 @@ export default function StorePage() {
       <section className="py-16 bg-white px-6">
         <div className="max-w-5xl mx-auto">
           <div className="bg-[#f0f4ff] rounded-2xl border border-blue-100 p-6 md:p-10 grid md:grid-cols-5 gap-8 items-start">
-            {/* Real cover */}
+            {/* Cover */}
             <div className="md:col-span-2">
               <div className="relative rounded-xl overflow-hidden shadow-xl border border-slate-200">
-                <Image src="/book-cover-sm.jpg" alt="Robotique Moderne — Guide Complet pour Débutants" width={600} height={900} className="w-full h-auto" />
+                <Image src="/representation.png" alt="Robotique Moderne — Guide Complet pour Débutants" width={600} height={900} className="w-full h-auto" />
               </div>
             </div>
 
             {/* Details */}
             <div className="md:col-span-3">
-              <span className="text-[10px] font-bold text-[#1a3ab5] bg-blue-100 px-2.5 py-1 rounded-full uppercase tracking-wider">Available Now · eBook PDF</span>
-              <h2 className="text-slate-900 text-2xl md:text-3xl font-bold mt-3 mb-1">Robotique Moderne</h2>
+              <div className="flex items-center gap-2 mb-3 flex-wrap">
+                <span className="text-[10px] font-bold text-[#1a3ab5] bg-blue-100 px-2.5 py-1 rounded-full uppercase tracking-wider">Available Now · eBook</span>
+                {/* Language selector */}
+                <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-0.5">
+                  <span className="text-[11px] font-bold bg-[#1a3ab5] text-white px-3 py-1 rounded-md">FR</span>
+                  <span className="text-[11px] font-semibold text-slate-400 px-3 py-1 rounded-md cursor-not-allowed" title="English version coming soon">EN</span>
+                </div>
+                <span className="text-[10px] text-slate-400 italic">English version coming soon</span>
+              </div>
+              <h2 className="text-slate-900 text-2xl md:text-3xl font-bold mb-1">Robotique Moderne</h2>
               <p className="text-slate-500 italic mb-1">Guide Complet pour Débutants</p>
               <p className="text-slate-400 text-sm mb-4">By Jean-Claude J. Desulme · Dex Atomes LLC</p>
 
@@ -91,11 +99,11 @@ export default function StorePage() {
               </div>
 
               <div className="flex items-center gap-4 mb-8 flex-wrap">
-                <span className="text-slate-900 text-3xl font-bold">$19.99</span>
+                <span className="text-slate-900 text-3xl font-bold">$9.99</span>
                 <button onClick={handleBuy} disabled={buying}
                   className="group inline-flex items-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold px-6 py-3 rounded-lg text-sm transition-all shadow-lg shadow-blue-900/20 disabled:opacity-50">
                   <ShoppingCart size={15} />
-                  {buying ? 'Processing...' : 'Buy eBook — $19.99'}
+                  {buying ? 'Processing...' : 'Buy eBook — $9.99'}
                   <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </div>

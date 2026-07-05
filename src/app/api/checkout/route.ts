@@ -20,7 +20,7 @@ export async function POST() {
         {
           price_data: {
             currency: 'usd',
-            unit_amount: 1999,
+            unit_amount: 999,
             product_data: {
               name: 'Robotique Moderne — eBook PDF',
               description: '129-page illustrated French robotics guide. Arduino, ESP32, AI, drones. By Dex Atomes LLC.',

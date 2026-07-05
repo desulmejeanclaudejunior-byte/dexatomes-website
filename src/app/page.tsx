@@ -195,7 +195,7 @@ export default function HomePage() {
               {/* Real book cover */}
               <div className="shrink-0 w-40 hidden sm:block">
                 <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden border border-blue-900/30 shadow-2xl shadow-blue-900/40">
-                  <Image src="/book-cover-sm.jpg" alt="Robotique Moderne — Guide Complet pour Débutants" fill className="object-cover" />
+                  <Image src="/representation.png" alt="Robotique Moderne — Guide Complet pour Débutants" fill className="object-cover" />
                 </div>
               </div>
             </motion.div>

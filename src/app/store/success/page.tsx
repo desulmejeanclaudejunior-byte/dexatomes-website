@@ -15,14 +15,15 @@ export default function SuccessPage() {
 
           <div className="flex justify-center mb-8">
             <div className="w-32 rounded-xl overflow-hidden shadow-lg border border-slate-200">
-              <Image src="/book-cover-sm.jpg" alt="Robotique Moderne" width={200} height={300} className="w-full h-auto" />
+              <Image src="/representation.png" alt="Robotique Moderne" width={200} height={300} className="w-full h-auto" />
             </div>
           </div>
 
           <div className="space-y-3 mb-8">
-            <a href="#download"
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-blue-900/20"
-              onClick={(e) => { e.preventDefault(); alert('Your download link will be sent to your email. If you need help, contact support@dexuslab.com') }}>
+            <a
+              href="/Robotique_Moderne.epub"
+              download="Robotique_Moderne.epub"
+              className="w-full inline-flex items-center justify-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-blue-900/20">
               <Download size={16} /> Download eBook
             </a>
           </div>
