@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 const FUNCTION_URL = 'https://us-central1-dexus-lab.cloudfunctions.net/verifyCertificate'
@@ -52,6 +51,51 @@ export async function generateMetadata({
   }
 }
 
+function NotFoundCard({ certId }: { certId: string }) {
+  return (
+    <div className="pt-16 min-h-screen" style={{ background: '#f1f5f9' }}>
+      <section style={{ background: '#04091A' }} className="py-14 px-6 text-center">
+        <p className="text-blue-300 text-xs font-bold tracking-[0.2em] uppercase mb-4">
+          Certificate Verification
+        </p>
+        <h1 className="text-white text-4xl md:text-5xl font-extrabold tracking-tight">
+          DEXUS<span style={{ color: '#2563EB' }}>Lab</span>
+        </h1>
+        <p className="text-slate-400 text-sm mt-2">Issued by DexAtomes LLC · Orlando, FL</p>
+      </section>
+      <section className="py-16 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <div
+            className="bg-white rounded-2xl p-12"
+            style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.08)', border: '1px solid #e2e8f0' }}
+          >
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+              style={{ background: '#fef2f2' }}
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold mb-3" style={{ color: '#0f172a' }}>
+              Certificate Not Found
+            </h2>
+            <p className="text-base mb-6" style={{ color: '#64748b', lineHeight: 1.7 }}>
+              No certificate matching <span className="font-mono font-semibold" style={{ color: '#334155' }}>{certId}</span> was found in our records.
+            </p>
+            <p className="text-sm" style={{ color: '#94a3b8' }}>
+              If you believe this is an error, please contact{' '}
+              <a href="mailto:support@dexatomes.com" style={{ color: '#2563EB' }}>
+                support@dexatomes.com
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 export default async function VerifyPage({
   params,
 }: {
@@ -59,7 +103,7 @@ export default async function VerifyPage({
 }) {
   const { certId } = await params
   const cert = await getCertificate(certId)
-  if (!cert) notFound()
+  if (!cert) return <NotFoundCard certId={certId} />
 
   const date = formatDate(cert.completionDate)
 
