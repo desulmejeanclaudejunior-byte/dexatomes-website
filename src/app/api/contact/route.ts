@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
-import { Resend } from 'resend'
+
+const CONTACT_FUNCTION_URL =
+  'https://us-central1-dexus-lab.cloudfunctions.net/contactForm'
 
 export async function POST(request: Request) {
   try {
@@ -9,19 +11,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Name and email are required' }, { status: 400 })
     }
 
-    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_REPLACE_ME') {
-      console.log('Contact form submission (Resend not configured):', { name, email, service, message })
-      return NextResponse.json({ ok: true })
-    }
-
-    const resend = new Resend(process.env.RESEND_API_KEY)
-
-    await resend.emails.send({
-      from: 'Dex Atomes <onboarding@resend.dev>',
-      to: 'support@dexuslab.com',
-      subject: `New inquiry from ${name} — ${service}`,
-      text: `From: ${name} (${email})\nService: ${service}\n\n${message}`,
+    const res = await fetch(CONTACT_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, service, message }),
     })
+
+    if (!res.ok) {
+      console.error('contactForm function error:', await res.text())
+      return NextResponse.json({ error: 'Failed to send' }, { status: 500 })
+    }
 
     return NextResponse.json({ ok: true })
   } catch (error) {
