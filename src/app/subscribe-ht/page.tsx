@@ -4,8 +4,8 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { CheckCircle2, Smartphone, ClipboardList, Key, AlertCircle } from 'lucide-react'
 
-const MONTHLY_PRICE = '$4.99'
-const ANNUAL_PRICE  = '$29.99'
+const MONTHLY_PRICE = '$10.00'
+const ANNUAL_PRICE  = '$100.00'
 const MONCASH_NUMBER = '+509 34214531'
 
 export default function SubscribeHTPage() {
