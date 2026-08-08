@@ -4,14 +4,16 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { CheckCircle2, Smartphone, ClipboardList, Key, AlertCircle } from 'lucide-react'
 
-const MONTHLY_HTG   = '~1,350 HTG'
-const ANNUAL_HTG    = '~13,000 HTG'
-const MONTHLY_USD   = '~$10 USD'
-const ANNUAL_USD    = '~$100 USD'
+const MONTHLY_HTG    = '~1,350 HTG'
+const SIXMONTH_HTG   = '~6,750 HTG'
+const ANNUAL_HTG     = '~13,000 HTG'
+const MONTHLY_USD    = '~$10 USD'
+const SIXMONTH_USD   = '~$50 USD'
+const ANNUAL_USD     = '~$100 USD'
 const MONCASH_NUMBER = '+509 34214531'
 
 export default function SubscribeHTPage() {
-  const [plan, setPlan]           = useState<'monthly' | 'annual'>('annual')
+  const [plan, setPlan]           = useState<'monthly' | 'six_months' | 'annual'>('annual')
   const [name, setName]           = useState('')
   const [email, setEmail]         = useState('')
   const [txRef, setTxRef]         = useState('')
@@ -64,18 +66,18 @@ export default function SubscribeHTPage() {
       <section className="py-12 px-6 bg-white">
         <div className="max-w-xl mx-auto">
           <h2 className="text-slate-900 text-xl font-bold text-center mb-6">Chwazi plan ou — Choose your plan</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-3">
             {/* Monthly */}
             <button
               onClick={() => setPlan('monthly')}
-              className={`rounded-2xl border-2 p-5 text-left transition-all ${
+              className={`rounded-2xl border-2 p-4 text-left transition-all ${
                 plan === 'monthly'
                   ? 'border-[#1a3ab5] bg-blue-50'
                   : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
             >
               <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Mansyèl · Monthly</p>
-              <p className="text-slate-900 text-3xl font-bold">{MONTHLY_HTG}</p>
+              <p className="text-slate-900 text-2xl font-bold">{MONTHLY_HTG}</p>
               <p className="text-slate-400 text-xs mt-1">chak mwa · per month</p>
               <p className="text-slate-400 text-xs">{MONTHLY_USD}</p>
               {plan === 'monthly' && (
@@ -86,10 +88,34 @@ export default function SubscribeHTPage() {
               )}
             </button>
 
+            {/* 6 months */}
+            <button
+              onClick={() => setPlan('six_months')}
+              className={`rounded-2xl border-2 p-4 text-left relative transition-all ${
+                plan === 'six_months'
+                  ? 'border-[#1a3ab5] bg-blue-50'
+                  : 'border-slate-200 bg-white hover:border-slate-300'
+              }`}
+            >
+              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-slate-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide whitespace-nowrap">
+                6 mwa · 6 months
+              </span>
+              <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">6 Mwa · 6 Months</p>
+              <p className="text-slate-900 text-2xl font-bold">{SIXMONTH_HTG}</p>
+              <p className="text-slate-400 text-xs mt-1">pou 6 mwa · for 6 months</p>
+              <p className="text-slate-400 text-xs">{SIXMONTH_USD}</p>
+              {plan === 'six_months' && (
+                <div className="mt-3 flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-[#1a3ab5]" />
+                  <span className="text-[#1a3ab5] text-xs font-semibold">Seleksyone · Selected</span>
+                </div>
+              )}
+            </button>
+
             {/* Annual */}
             <button
               onClick={() => setPlan('annual')}
-              className={`rounded-2xl border-2 p-5 text-left relative transition-all ${
+              className={`rounded-2xl border-2 p-4 text-left relative transition-all ${
                 plan === 'annual'
                   ? 'border-[#1a3ab5] bg-blue-50'
                   : 'border-slate-200 bg-white hover:border-slate-300'
@@ -99,7 +125,7 @@ export default function SubscribeHTPage() {
                 Meyè valè · Best value
               </span>
               <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Anyèl · Annual</p>
-              <p className="text-slate-900 text-3xl font-bold">{ANNUAL_HTG}</p>
+              <p className="text-slate-900 text-2xl font-bold">{ANNUAL_HTG}</p>
               <p className="text-slate-400 text-xs mt-1">pa ane · per year</p>
               <p className="text-slate-400 text-xs">{ANNUAL_USD}</p>
               {plan === 'annual' && (
@@ -162,9 +188,10 @@ export default function SubscribeHTPage() {
           <p className="text-slate-400 text-xs mt-4">
             Voye{' '}
             <span className="font-bold text-slate-600">
-              {plan === 'annual' ? ANNUAL_HTG : MONTHLY_HTG}
+              {plan === 'annual' ? ANNUAL_HTG : plan === 'six_months' ? SIXMONTH_HTG : MONTHLY_HTG}
             </span>{' '}
-            pou plan {plan === 'annual' ? 'anyèl' : 'mansyèl'} ou.
+            pou plan{' '}
+            {plan === 'annual' ? 'anyèl' : plan === 'six_months' ? '6 mwa' : 'mansyèl'} ou.
           </p>
         </div>
       </section>
@@ -191,10 +218,10 @@ export default function SubscribeHTPage() {
               {/* Plan confirmation */}
               <div className="bg-[#f0f4ff] rounded-xl p-3 flex items-center justify-between">
                 <span className="text-slate-600 text-sm font-medium">
-                  {plan === 'annual' ? 'Annual plan' : 'Monthly plan'}
+                  {plan === 'annual' ? 'Annual plan' : plan === 'six_months' ? '6-month plan' : 'Monthly plan'}
                 </span>
                 <span className="text-[#1a3ab5] font-bold">
-                  {plan === 'annual' ? ANNUAL_HTG : MONTHLY_HTG}
+                  {plan === 'annual' ? ANNUAL_HTG : plan === 'six_months' ? SIXMONTH_HTG : MONTHLY_HTG}
                 </span>
               </div>
 
