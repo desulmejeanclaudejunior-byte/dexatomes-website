@@ -4,8 +4,10 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { CheckCircle2, Smartphone, ClipboardList, Key, AlertCircle } from 'lucide-react'
 
-const MONTHLY_PRICE = '$10.00'
-const ANNUAL_PRICE  = '$100.00'
+const MONTHLY_HTG   = '~1,350 HTG'
+const ANNUAL_HTG    = '~13,000 HTG'
+const MONTHLY_USD   = '~$10 USD'
+const ANNUAL_USD    = '~$100 USD'
 const MONCASH_NUMBER = '+509 34214531'
 
 export default function SubscribeHTPage() {
@@ -73,8 +75,9 @@ export default function SubscribeHTPage() {
               }`}
             >
               <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Mansyèl · Monthly</p>
-              <p className="text-slate-900 text-3xl font-bold">{MONTHLY_PRICE}</p>
+              <p className="text-slate-900 text-3xl font-bold">{MONTHLY_HTG}</p>
               <p className="text-slate-400 text-xs mt-1">chak mwa · per month</p>
+              <p className="text-slate-400 text-xs">{MONTHLY_USD}</p>
               {plan === 'monthly' && (
                 <div className="mt-3 flex items-center gap-1.5">
                   <CheckCircle2 size={14} className="text-[#1a3ab5]" />
@@ -96,8 +99,9 @@ export default function SubscribeHTPage() {
                 Meyè valè · Best value
               </span>
               <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Anyèl · Annual</p>
-              <p className="text-slate-900 text-3xl font-bold">{ANNUAL_PRICE}</p>
+              <p className="text-slate-900 text-3xl font-bold">{ANNUAL_HTG}</p>
               <p className="text-slate-400 text-xs mt-1">pa ane · per year</p>
+              <p className="text-slate-400 text-xs">{ANNUAL_USD}</p>
               {plan === 'annual' && (
                 <div className="mt-3 flex items-center gap-1.5">
                   <CheckCircle2 size={14} className="text-[#1a3ab5]" />
@@ -158,7 +162,7 @@ export default function SubscribeHTPage() {
           <p className="text-slate-400 text-xs mt-4">
             Voye{' '}
             <span className="font-bold text-slate-600">
-              {plan === 'annual' ? ANNUAL_PRICE : MONTHLY_PRICE}
+              {plan === 'annual' ? ANNUAL_HTG : MONTHLY_HTG}
             </span>{' '}
             pou plan {plan === 'annual' ? 'anyèl' : 'mansyèl'} ou.
           </p>
@@ -190,7 +194,7 @@ export default function SubscribeHTPage() {
                   {plan === 'annual' ? 'Annual plan' : 'Monthly plan'}
                 </span>
                 <span className="text-[#1a3ab5] font-bold">
-                  {plan === 'annual' ? ANNUAL_PRICE : MONTHLY_PRICE}
+                  {plan === 'annual' ? ANNUAL_HTG : MONTHLY_HTG}
                 </span>
               </div>
 
