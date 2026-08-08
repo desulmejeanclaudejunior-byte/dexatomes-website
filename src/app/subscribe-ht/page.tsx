@@ -4,22 +4,52 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { CheckCircle2, Smartphone, ClipboardList, Key, AlertCircle } from 'lucide-react'
 
-const MONTHLY_HTG    = '~1,350 HTG'
-const SIXMONTH_HTG   = '~6,750 HTG'
-const ANNUAL_HTG     = '~13,000 HTG'
-const MONTHLY_USD    = '~$10 USD'
-const SIXMONTH_USD   = '~$50 USD'
-const ANNUAL_USD     = '~$100 USD'
 const MONCASH_NUMBER = '+509 34214531'
 
+const PLANS = [
+  {
+    id: 'monthly' as const,
+    labelCr: 'Mansyèl',
+    labelEn: 'Monthly',
+    amount: '1,350',
+    periodCr: 'chak mwa',
+    periodEn: 'per month',
+    usd: '$10',
+  },
+  {
+    id: 'six_months' as const,
+    labelCr: '6 Mwa',
+    labelEn: '6 Months',
+    amount: '6,750',
+    periodCr: 'pou 6 mwa',
+    periodEn: 'for 6 months',
+    usd: '$50',
+    badge: 'Popilè · Popular',
+    bestValue: false,
+  },
+  {
+    id: 'annual' as const,
+    labelCr: 'Anyèl',
+    labelEn: 'Annual',
+    amount: '13,000',
+    periodCr: 'pa ane',
+    periodEn: 'per year',
+    usd: '$100',
+    badge: 'Meyè valè · Best value',
+    bestValue: true,
+  },
+]
+
 export default function SubscribeHTPage() {
-  const [plan, setPlan]           = useState<'monthly' | 'six_months' | 'annual'>('annual')
-  const [name, setName]           = useState('')
-  const [email, setEmail]         = useState('')
-  const [txRef, setTxRef]         = useState('')
-  const [loading, setLoading]     = useState(false)
-  const [done, setDone]           = useState(false)
-  const [error, setError]         = useState('')
+  const [plan, setPlan]       = useState<'monthly' | 'six_months' | 'annual'>('annual')
+  const [name, setName]       = useState('')
+  const [email, setEmail]     = useState('')
+  const [txRef, setTxRef]     = useState('')
+  const [loading, setLoading] = useState(false)
+  const [done, setDone]       = useState(false)
+  const [error, setError]     = useState('')
+
+  const selected = PLANS.find(p => p.id === plan)!
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,76 +95,55 @@ export default function SubscribeHTPage() {
       {/* ── Pricing ── */}
       <section className="py-12 px-6 bg-white">
         <div className="max-w-xl mx-auto">
-          <h2 className="text-slate-900 text-xl font-bold text-center mb-6">Chwazi plan ou — Choose your plan</h2>
-          <div className="grid grid-cols-3 gap-3">
-            {/* Monthly */}
-            <button
-              onClick={() => setPlan('monthly')}
-              className={`rounded-2xl border-2 p-4 text-left transition-all ${
-                plan === 'monthly'
-                  ? 'border-[#1a3ab5] bg-blue-50'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
-              }`}
-            >
-              <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Mansyèl · Monthly</p>
-              <p className="text-slate-900 text-2xl font-bold">{MONTHLY_HTG}</p>
-              <p className="text-slate-400 text-xs mt-1">chak mwa · per month</p>
-              <p className="text-slate-400 text-xs">{MONTHLY_USD}</p>
-              {plan === 'monthly' && (
-                <div className="mt-3 flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-[#1a3ab5]" />
-                  <span className="text-[#1a3ab5] text-xs font-semibold">Seleksyone · Selected</span>
-                </div>
-              )}
-            </button>
+          <h2 className="text-slate-900 text-xl font-bold text-center mb-1">Chwazi plan ou</h2>
+          <p className="text-slate-400 text-sm text-center mb-8">Choose your plan</p>
 
-            {/* 6 months */}
-            <button
-              onClick={() => setPlan('six_months')}
-              className={`rounded-2xl border-2 p-4 text-left relative transition-all ${
-                plan === 'six_months'
-                  ? 'border-[#1a3ab5] bg-blue-50'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
-              }`}
-            >
-              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-slate-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide whitespace-nowrap">
-                6 mwa · 6 months
-              </span>
-              <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">6 Mwa · 6 Months</p>
-              <p className="text-slate-900 text-2xl font-bold">{SIXMONTH_HTG}</p>
-              <p className="text-slate-400 text-xs mt-1">pou 6 mwa · for 6 months</p>
-              <p className="text-slate-400 text-xs">{SIXMONTH_USD}</p>
-              {plan === 'six_months' && (
-                <div className="mt-3 flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-[#1a3ab5]" />
-                  <span className="text-[#1a3ab5] text-xs font-semibold">Seleksyone · Selected</span>
+          <div className="flex flex-col gap-3">
+            {PLANS.map(p => (
+              <button
+                key={p.id}
+                onClick={() => setPlan(p.id)}
+                className={`w-full rounded-2xl border-2 px-5 py-4 flex items-center gap-4 text-left transition-all ${
+                  plan === p.id
+                    ? 'border-[#1a3ab5] bg-blue-50'
+                    : 'border-slate-200 bg-white hover:border-slate-300'
+                }`}
+              >
+                {/* Radio indicator */}
+                <div className={`w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
+                  plan === p.id ? 'border-[#1a3ab5]' : 'border-slate-300'
+                }`}>
+                  {plan === p.id && <div className="w-2.5 h-2.5 rounded-full bg-[#1a3ab5]" />}
                 </div>
-              )}
-            </button>
 
-            {/* Annual */}
-            <button
-              onClick={() => setPlan('annual')}
-              className={`rounded-2xl border-2 p-4 text-left relative transition-all ${
-                plan === 'annual'
-                  ? 'border-[#1a3ab5] bg-blue-50'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
-              }`}
-            >
-              <span className="absolute -top-2.5 right-3 bg-[#1a3ab5] text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
-                Meyè valè · Best value
-              </span>
-              <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">Anyèl · Annual</p>
-              <p className="text-slate-900 text-2xl font-bold">{ANNUAL_HTG}</p>
-              <p className="text-slate-400 text-xs mt-1">pa ane · per year</p>
-              <p className="text-slate-400 text-xs">{ANNUAL_USD}</p>
-              {plan === 'annual' && (
-                <div className="mt-3 flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-[#1a3ab5]" />
-                  <span className="text-[#1a3ab5] text-xs font-semibold">Seleksyone · Selected</span>
+                {/* Plan label + badge */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-slate-800 font-bold text-sm">
+                    {p.labelCr}{' '}
+                    <span className="text-slate-400 font-normal">· {p.labelEn}</span>
+                  </p>
+                  {p.badge && (
+                    <span className={`inline-block mt-1.5 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wide ${
+                      p.bestValue
+                        ? 'bg-[#1a3ab5] text-white'
+                        : 'bg-slate-100 text-slate-500'
+                    }`}>
+                      {p.badge}
+                    </span>
+                  )}
                 </div>
-              )}
-            </button>
+
+                {/* Price block */}
+                <div className="text-right shrink-0">
+                  <p className="text-slate-900 font-extrabold text-xl leading-none">
+                    {p.amount}{' '}
+                    <span className="text-slate-500 text-sm font-semibold">HTG</span>
+                  </p>
+                  <p className="text-slate-400 text-xs mt-1">{p.periodEn}</p>
+                  <p className="text-slate-300 text-xs">≈ {p.usd} USD</p>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -145,9 +154,9 @@ export default function SubscribeHTPage() {
           <h2 className="text-slate-900 text-lg font-bold text-center mb-6">Kijan sa travay — How it works</h2>
           <div className="space-y-4">
             {[
-              { icon: Smartphone,    title: 'Peye ak MonCash',          sub: 'Skane QR a oswa voye lajan dirèkteman nan nimewo a anba a. — Scan the QR or send directly to the number below.' },
-              { icon: ClipboardList, title: 'Notе referans tranzaksyon', sub: 'Apre peman an, MonCash ap ba ou yon nimewo referans. Ekri li. — After payment, MonCash gives you a transaction reference. Note it down.' },
-              { icon: Key,           title: 'Ranpli fòm nan',            sub: 'Antre non ou, imèl, ak referans la anba a. Nou ap voye kòd ou nan 24è. — Fill the form below. We\'ll email your code within 24 hours.' },
+              { icon: Smartphone,    title: 'Peye ak MonCash',           sub: 'Skane QR a oswa voye lajan dirèkteman nan nimewo a anba a. — Scan the QR or send directly to the number below.' },
+              { icon: ClipboardList, title: 'Notе referans tranzaksyon',  sub: 'Apre peman an, MonCash ap ba ou yon nimewo referans. Ekri li. — After payment, MonCash gives you a transaction reference. Note it down.' },
+              { icon: Key,           title: 'Ranpli fòm nan',             sub: "Antre non ou, imèl, ak referans la anba a. Nou ap voye kòd ou nan 24è. — Fill the form below. We'll email your code within 24 hours." },
             ].map(({ icon: Icon, title, sub }, i) => (
               <div key={i} className="flex gap-4 bg-white rounded-xl p-4 border border-blue-100">
                 <div className="w-9 h-9 rounded-lg bg-[#1a3ab5]/10 flex items-center justify-center shrink-0">
@@ -188,10 +197,9 @@ export default function SubscribeHTPage() {
           <p className="text-slate-400 text-xs mt-4">
             Voye{' '}
             <span className="font-bold text-slate-600">
-              {plan === 'annual' ? ANNUAL_HTG : plan === 'six_months' ? SIXMONTH_HTG : MONTHLY_HTG}
+              {selected.amount} HTG
             </span>{' '}
-            pou plan{' '}
-            {plan === 'annual' ? 'anyèl' : plan === 'six_months' ? '6 mwa' : 'mansyèl'} ou.
+            pou plan {selected.labelCr} ou.
           </p>
         </div>
       </section>
@@ -207,21 +215,23 @@ export default function SubscribeHTPage() {
               <CheckCircle2 size={44} className="text-green-500 mx-auto mb-4" />
               <h3 className="text-slate-900 font-bold text-lg mb-2">Nou resevwa peman ou!</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                We received your payment confirmation. Your access code will be sent to <span className="font-semibold text-slate-700">{email}</span> within 24 hours.
+                We received your payment confirmation. Your access code will be sent to{' '}
+                <span className="font-semibold text-slate-700">{email}</span> within 24 hours.
               </p>
               <p className="text-slate-400 text-xs mt-4">
-                Pwoblèm? · Problems? <a href="mailto:support@dexuslab.com" className="text-[#1a3ab5] font-semibold">support@dexuslab.com</a>
+                Pwoblèm? · Problems?{' '}
+                <a href="mailto:support@dexuslab.com" className="text-[#1a3ab5] font-semibold">support@dexuslab.com</a>
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
-              {/* Plan confirmation */}
+              {/* Plan summary */}
               <div className="bg-[#f0f4ff] rounded-xl p-3 flex items-center justify-between">
                 <span className="text-slate-600 text-sm font-medium">
-                  {plan === 'annual' ? 'Annual plan' : plan === 'six_months' ? '6-month plan' : 'Monthly plan'}
+                  {selected.labelCr} · {selected.labelEn}
                 </span>
-                <span className="text-[#1a3ab5] font-bold">
-                  {plan === 'annual' ? ANNUAL_HTG : plan === 'six_months' ? SIXMONTH_HTG : MONTHLY_HTG}
+                <span className="text-[#1a3ab5] font-extrabold">
+                  {selected.amount} HTG
                 </span>
               </div>
 
