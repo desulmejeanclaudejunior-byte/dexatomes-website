@@ -124,6 +124,13 @@ body {
 a:hover .plate img,
 a:focus-visible .plate img { transform: scale(1.05); filter: grayscale(0%) contrast(1.05); }
 
+/* `.raw` opts an image out of the plate's grading — used for the book
+   covers, which must render exactly as authored. */
+.plate.raw img,
+.plate.raw:hover img,
+a:hover .plate.raw img,
+a:focus-visible .plate.raw img { filter: none; }
+
 /* Corner instrument ticks */
 .ticks::before,
 .ticks::after {

@@ -14,7 +14,7 @@ export default function SuccessPage() {
       <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10">
         <div className="grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
           <Reveal className="lg:col-span-4">
-            <div className="plate ticks aspect-[2/3] max-w-[300px]">
+            <div className="plate raw ticks aspect-[2/3] max-w-[300px]">
               <Image
                 src="/representation.png"
                 alt="Robotique Moderne"

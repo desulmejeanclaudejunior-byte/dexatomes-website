@@ -225,7 +225,7 @@ export default function HomePage() {
             <Reveal className="lg:col-span-7">
               <div className="grid sm:grid-cols-5 gap-10 items-center">
                 <Link href="/store" className="sm:col-span-2 block">
-                  <div className="plate aspect-[2/3]">
+                  <div className="plate raw aspect-[2/3]">
                     <Image
                       src="/representation.png"
                       alt="Robotique Moderne — Guide Complet pour Débutants"

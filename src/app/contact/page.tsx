@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 
 import Reveal from '@/components/Reveal'
 import Eyebrow from '@/components/Eyebrow'
+import Backdrop from '@/components/Backdrop'
 import ContactForm from '@/components/ContactForm'
 import { contact } from '@/content/site'
 
@@ -17,8 +18,9 @@ export default function ContactPage() {
     <>
       {/* Masthead */}
       <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
-        <div className="absolute inset-0 hero-bg -z-10" />
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+        <div className="absolute inset-0 hero-bg z-0" />
+        <Backdrop src="https://images.unsplash.com/photo-1550439062-609e1531270e?w=1800&h=1000&fit=crop" opacity={0.28} position="50% 40%" priority />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10">
           <Reveal>
             <Eyebrow num="01" label="Contact" className="mb-12" />
           </Reveal>

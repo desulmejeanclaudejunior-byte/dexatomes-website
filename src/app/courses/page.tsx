@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react'
 
 import Reveal from '@/components/Reveal'
 import Eyebrow from '@/components/Eyebrow'
+import Backdrop from '@/components/Backdrop'
 import { tracks, contact } from '@/content/site'
 
 export const metadata: Metadata = { title: 'Courses & Resources' }
@@ -26,8 +27,9 @@ export default function CoursesPage() {
     <>
       {/* Masthead */}
       <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
-        <div className="absolute inset-0 hero-bg -z-10" />
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+        <div className="absolute inset-0 hero-bg z-0" />
+        <Backdrop src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1800&h=1000&fit=crop" opacity={0.30} position="50% 50%" priority />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10">
           <Reveal>
             <Eyebrow num="01" label="DexusLab Courses" className="mb-12" />
           </Reveal>

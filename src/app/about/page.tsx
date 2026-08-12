@@ -5,6 +5,7 @@ import { Award, Rocket, Zap, Target, ArrowRight } from 'lucide-react'
 
 import Reveal from '@/components/Reveal'
 import Eyebrow from '@/components/Eyebrow'
+import Backdrop from '@/components/Backdrop'
 import { values, contact } from '@/content/site'
 
 export const metadata: Metadata = { title: 'About' }
@@ -21,8 +22,9 @@ export default function AboutPage() {
     <>
       {/* Masthead */}
       <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
-        <div className="absolute inset-0 hero-bg -z-10" />
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+        <div className="absolute inset-0 hero-bg z-0" />
+        <Backdrop src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1800&h=1000&fit=crop" opacity={0.34} position="50% 45%" priority />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10">
           <Reveal>
             <Eyebrow num="01" label="About" className="mb-12" />
           </Reveal>

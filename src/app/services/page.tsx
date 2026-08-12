@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 
 import Reveal from '@/components/Reveal'
 import Eyebrow from '@/components/Eyebrow'
+import Backdrop from '@/components/Backdrop'
 import ServiceGrid from '@/components/ServiceGrid'
 
 export const metadata: Metadata = { title: 'Services' }
@@ -13,8 +14,9 @@ export default function ServicesPage() {
     <>
       {/* Masthead */}
       <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
-        <div className="absolute inset-0 hero-bg -z-10" />
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+        <div className="absolute inset-0 hero-bg z-0" />
+        <Backdrop src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1800&h=1000&fit=crop" opacity={0.26} position="60% 50%" priority />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10">
           <Reveal>
             <Eyebrow num="01" label="Services" className="mb-12" />
           </Reveal>

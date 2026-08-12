@@ -7,6 +7,7 @@ import { ShoppingCart, ArrowRight, CheckCircle2, Bell, Download, BookOpen, Wrenc
 
 import Reveal from '@/components/Reveal'
 import Eyebrow from '@/components/Eyebrow'
+import Backdrop from '@/components/Backdrop'
 import { contact } from '@/content/site'
 
 const books = [
@@ -61,8 +62,9 @@ export default function StorePage() {
     <>
       {/* Masthead */}
       <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
-        <div className="absolute inset-0 hero-bg -z-10" />
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+        <div className="absolute inset-0 hero-bg z-0" />
+        <Backdrop src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&h=1000&fit=crop" opacity={0.26} position="50% 50%" priority />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10">
           <Reveal>
             <Eyebrow num="01" label="Bookstore" className="mb-12" />
           </Reveal>
@@ -84,7 +86,7 @@ export default function StorePage() {
         <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             <Reveal className="lg:col-span-5">
-              <div className="plate ticks aspect-[2/3]">
+              <div className="plate raw ticks aspect-[2/3]">
                 <Image
                   src="/representation.png"
                   alt="Robotique Moderne — Guide Complet pour Débutants"
@@ -183,7 +185,7 @@ export default function StorePage() {
             {books.map((b, i) => (
               <Reveal key={b.title} delay={(i % 3) * 70}>
                 <article className="group">
-                  <div className="plate aspect-[3/4] mb-6">
+                  <div className="plate raw aspect-[3/4] mb-6">
                     <Image
                       src={b.img}
                       alt={b.title}
