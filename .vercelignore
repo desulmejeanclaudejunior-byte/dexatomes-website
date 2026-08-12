@@ -1,0 +1,15 @@
+# Vercel uses this instead of .gitignore when present.
+# The book PDF is gitignored (too large for GitHub) but MUST ship to
+# production, so it is deliberately not listed here.
+
+node_modules
+.next
+.git
+.vercel
+
+# never upload secrets
+.env
+.env.*
+
+*.tsbuildinfo
+.DS_Store
