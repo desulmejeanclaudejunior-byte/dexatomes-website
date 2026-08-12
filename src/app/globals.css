@@ -54,31 +54,50 @@ body {
   border-radius: 2px;
 }
 
-/* ── Type roles ───────────────────────────────────────────── */
+/* ── Type roles ───────────────────────────────────────────────
+   `.display` is the drawn serif, used for statements only.
+   `.mono` is retained as a class name so existing markup keeps
+   working, but it now renders as a finely tracked small-caps
+   label rather than a mechanical monospace face.
+   ──────────────────────────────────────────────────────────── */
 .mono {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.16em;
+  font-weight: 500;
 }
 
 .display {
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  font-family: var(--font-display), Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.02;
   text-wrap: balance;
 }
+.display em,
+.display .em {
+  font-style: italic;
+  color: var(--blue);
+}
+
+/* Serif numerals and small statements */
+.serif { font-family: var(--font-display), Georgia, serif; font-weight: 400; }
 
 /* ── Numbered eyebrow: 01 ——— LABEL ───────────────────────── */
 .eyebrow { display: flex; align-items: center; gap: 16px; }
 .eyebrow .num {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 12px;
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
   color: var(--blue);
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
 }
 .eyebrow .rule { flex: 1; height: 1px; background: var(--hair-2); max-width: 220px; }
 .eyebrow .lbl {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.26em;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -141,6 +160,77 @@ a:focus-visible .plate img { transform: scale(1.05); filter: grayscale(0%) contr
 }
 .navlink:hover::after,
 .navlink[data-active='true']::after { width: 100%; }
+
+/* ── Windows (overlay panels the visitor opens) ───────────── */
+.win-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(4, 5, 8, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.win-backdrop[data-open='true'] { opacity: 1; }
+
+.win {
+  position: fixed;
+  z-index: 91;
+  inset: auto 0 0 0;
+  max-height: 92svh;
+  background: var(--surface);
+  border-top: 1px solid var(--hair-2);
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform .5s cubic-bezier(.16,.84,.3,1);
+}
+.win[data-open='true'] { transform: translateY(0); }
+
+@media (min-width: 900px) {
+  .win {
+    inset: 50% auto auto 50%;
+    width: min(1080px, 92vw);
+    max-height: 88svh;
+    border: 1px solid var(--hair-2);
+    transform: translate(-50%, -46%) scale(.985);
+    opacity: 0;
+    transition: transform .45s cubic-bezier(.16,.84,.3,1), opacity .35s ease;
+  }
+  .win[data-open='true'] {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* The affordance that opens a window */
+.win-open {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color .3s ease;
+}
+.win-open:hover { color: var(--blue); }
+.win-open .plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border: 1px solid var(--hair-2);
+  border-radius: 50%;
+  transition: border-color .3s ease, background-color .3s ease, transform .4s ease;
+}
+.win-open:hover .plus {
+  border-color: var(--blue);
+  background: rgba(61,123,255,.09);
+  transform: rotate(90deg);
+}
 
 /* ── Buttons ──────────────────────────────────────────────── */
 /* `:not(.hidden)` so Tailwind's responsive `hidden` utility still wins —

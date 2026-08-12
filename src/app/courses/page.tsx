@@ -32,7 +32,7 @@ export default function CoursesPage() {
             <Eyebrow num="01" label="DexusLab Courses" className="mb-12" />
           </Reveal>
           <Reveal delay={90}>
-            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[14ch]">
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] max-w-[14ch]">
               Learn by <span className="text-[var(--blue)]">building</span>
             </h1>
           </Reveal>

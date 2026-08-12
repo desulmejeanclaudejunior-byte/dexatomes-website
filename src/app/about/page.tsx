@@ -27,7 +27,7 @@ export default function AboutPage() {
             <Eyebrow num="01" label="About" className="mb-12" />
           </Reveal>
           <Reveal delay={90}>
-            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[14ch]">
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] max-w-[14ch]">
               Built by an <span className="text-[var(--blue)]">engineer</span>
             </h1>
           </Reveal>
@@ -64,7 +64,7 @@ export default function AboutPage() {
                 height={54}
                 className="h-11 w-auto mb-10"
               />
-              <h2 className="display text-[var(--ink)] text-[clamp(1.7rem,3vw,2.5rem)] font-semibold mb-2">
+              <h2 className="display text-[var(--ink)] text-[clamp(1.7rem,3vw,2.5rem)] mb-2">
                 Jean-Claude Junior Desulme
               </h2>
               <p className="mono text-[11px] tracking-[0.2em] uppercase text-[var(--blue)] mb-10">

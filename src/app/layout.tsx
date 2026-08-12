@@ -1,20 +1,24 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Instrument_Serif, Manrope } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const inter = Inter({
+/* Display face — used large and sparingly, with italic for accented words.
+   Gives the headlines drawn character rather than a default UI face. */
+const display = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-sans',
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
   display: 'swap',
 })
 
-/* Utility face for technical labels, figures and section markers. */
-const mono = JetBrains_Mono({
+/* Reading and interface face — humanist, warmer than a default grotesque. */
+const sans = Manrope({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-mono',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-sans',
   display: 'swap',
 })
 
@@ -26,8 +30,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
-      <body className={`${inter.className} antialiased`}>
+    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+      <body className={`${sans.className} antialiased`}>
         <Navbar />
         <main>{children}</main>
         <Footer />

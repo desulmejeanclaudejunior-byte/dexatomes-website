@@ -67,7 +67,7 @@ export default function StorePage() {
             <Eyebrow num="01" label="Bookstore" className="mb-12" />
           </Reveal>
           <Reveal delay={90}>
-            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[14ch]">
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] max-w-[14ch]">
               Engineering <span className="text-[var(--blue)]">Library</span>
             </h1>
           </Reveal>
@@ -113,7 +113,7 @@ export default function StorePage() {
                 <span className="mono text-[10px] text-[var(--faint)] italic">English version coming soon</span>
               </div>
 
-              <h2 className="display text-[var(--ink)] text-[clamp(1.9rem,4vw,3.2rem)] font-semibold mb-3">
+              <h2 className="display text-[var(--ink)] text-[clamp(1.9rem,4vw,3.2rem)] mb-3">
                 Robotique Moderne
               </h2>
               <p className="text-[var(--muted)] text-[16px] italic mb-2">Guide Complet pour Débutants</p>
@@ -143,7 +143,7 @@ export default function StorePage() {
               </ul>
 
               <div className="flex items-center gap-7 flex-wrap mb-14">
-                <span className="display text-[var(--ink)] text-4xl font-semibold">$9.99</span>
+                <span className="display text-[var(--ink)] text-4xl">$9.99</span>
                 <button onClick={handleBuy} disabled={buying} className="btn btn-solid disabled:opacity-50">
                   <ShoppingCart size={15} />
                   {buying ? 'Processing...' : 'Buy eBook — $9.99'}

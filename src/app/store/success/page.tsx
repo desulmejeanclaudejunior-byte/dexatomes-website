@@ -34,7 +34,7 @@ export default function SuccessPage() {
               </span>
             </div>
 
-            <h1 className="display text-[var(--ink)] text-[clamp(2rem,5vw,3.8rem)] font-semibold mb-7 max-w-[16ch]">
+            <h1 className="display text-[var(--ink)] text-[clamp(2rem,5vw,3.8rem)] mb-7 max-w-[16ch]">
               Your eBook is ready
             </h1>
 

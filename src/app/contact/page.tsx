@@ -23,7 +23,7 @@ export default function ContactPage() {
             <Eyebrow num="01" label="Contact" className="mb-12" />
           </Reveal>
           <Reveal delay={90}>
-            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[12ch]">
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] max-w-[12ch]">
               Get in <span className="text-[var(--blue)]">touch</span>
             </h1>
           </Reveal>

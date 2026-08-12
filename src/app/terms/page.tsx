@@ -11,7 +11,7 @@ export default function TermsPage() {
       <section className="hero-bg grid-tex pt-36 pb-16 lg:pt-44 lg:pb-20 px-6 sm:px-10">
         <div className="max-w-[1400px] mx-auto">
           <p className="mono text-[11px] tracking-[0.26em] uppercase text-[var(--blue)] mb-8">Legal</p>
-          <h1 className="display text-[var(--ink)] text-[clamp(2.25rem,5.5vw,4rem)] font-semibold mb-6">
+          <h1 className="display text-[var(--ink)] text-[clamp(2.25rem,5.5vw,4rem)] mb-6">
             Terms of Service
           </h1>
           <p className="text-[var(--muted)] text-[16px]">DEXUS Lab — DexAtomes LLC</p>

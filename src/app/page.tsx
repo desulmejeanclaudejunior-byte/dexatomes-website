@@ -1,89 +1,87 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, ShoppingCart, CheckCircle2, BookOpen, Wrench, Rocket, Heart } from 'lucide-react'
+import { ArrowRight, ShoppingCart, BookOpen, Wrench, Rocket, Heart } from 'lucide-react'
 
 import Reveal from '@/components/Reveal'
 import Eyebrow from '@/components/Eyebrow'
 import ContactForm from '@/components/ContactForm'
-import { capabilities, values, badges, comingSoon, contact, serviceOptions } from '@/content/site'
+import CapabilityGrid from '@/components/CapabilityGrid'
+import { values, badges, comingSoon, contact, serviceOptions } from '@/content/site'
 
 export default function HomePage() {
   return (
     <>
       {/* ════════════════════════════════════════════════════
-          HERO — cinematic split: type on graphite, image bleeding
-          off the right edge. The source plate carries baked-in
-          artwork on its left third, so it is cropped hard right.
+          HERO — the image is atmosphere, faded far back so the
+          statement carries the screen. Almost no copy up front.
       ════════════════════════════════════════════════════ */}
       <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
-        <div className="absolute inset-0 grid-tex" />
-
-        {/* Image half */}
-        <div className="absolute inset-y-0 right-0 w-full lg:w-[54%]">
+        {/* Ambient plate, heavily faded */}
+        <div className="absolute inset-0">
           <Image
             src="/hero-bg.png"
-            alt="Robotic manipulator over a circuit landscape"
+            alt=""
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 54vw"
-            className="object-cover"
+            sizes="100vw"
+            className="object-cover opacity-[0.28]"
             style={{ objectPosition: '78% 50%' }}
           />
-          {/* Feather the plate into the page on every edge that meets type.
-              Mobile lays type over the image, so it carries a heavier scrim. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg)] via-[var(--bg)]/75 to-[var(--bg)]/40 lg:via-[var(--bg)]/25 lg:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/45 to-[var(--bg)]/70 lg:via-transparent lg:to-[var(--bg)]/60" />
+          <div className="absolute inset-0 bg-[var(--bg)]/45" />
+          {/* Vignette: darkest where the type sits */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg)] via-[var(--bg)]/70 to-[var(--bg)]/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-transparent to-[var(--bg)]/85" />
         </div>
+        <div className="absolute inset-0 grid-tex" />
 
-        {/* Type half */}
+        {/* Soft cobalt bloom */}
+        <div className="pointer-events-none absolute top-1/4 -left-40 w-[720px] h-[720px] rounded-full bg-[var(--blue)]/[0.07] blur-[160px]" />
+
         <div className="relative flex-1 flex items-center w-full pt-32 pb-16 lg:pt-24 lg:pb-10">
           <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10">
-            <div className="max-w-[680px]">
-            <Reveal>
-              <Eyebrow label="Build · Learn · Innovate" className="mb-9" />
-            </Reveal>
+            <div className="max-w-[900px]">
+              <Reveal>
+                <Eyebrow label="Build · Learn · Innovate" className="mb-12" />
+              </Reveal>
 
-            <Reveal delay={90}>
-              <h1 className="display text-[var(--ink)] text-[clamp(2.75rem,7.2vw,5.6rem)] font-semibold">
-                Engineering
-                <br />
-                solutions built
-                <br />
-                <span className="text-[var(--blue)]">for the future</span>
-              </h1>
-            </Reveal>
+              <Reveal delay={110}>
+                <h1 className="display text-[var(--ink)] text-[clamp(3rem,8.5vw,7rem)]">
+                  Engineering solutions
+                  <br />
+                  built <em>for the future</em>
+                </h1>
+              </Reveal>
 
-            <Reveal delay={180}>
-              <p className="text-[var(--muted)] text-[16px] leading-[1.85] mt-9 max-w-[430px]">
-                Dex Atomes designs software, builds robotics and electronics, and publishes
-                engineering education — from Orlando to the world.
-              </p>
-            </Reveal>
+              <Reveal delay={220}>
+                <p className="text-[var(--muted)] text-[17px] leading-[1.8] mt-10 max-w-[400px]">
+                  Software, robotics, and engineering education.
+                </p>
+              </Reveal>
 
-            <Reveal delay={260}>
-              <div className="flex flex-wrap gap-4 mt-11">
-                <Link href="/services" className="btn btn-solid">
-                  Explore Services <ArrowRight size={14} />
-                </Link>
-                <Link href="/store" className="btn btn-ghost">
-                  <ShoppingCart size={14} /> Visit Bookstore
-                </Link>
-              </div>
-            </Reveal>
+              <Reveal delay={300}>
+                <div className="flex flex-wrap gap-4 mt-12">
+                  <Link href="/services" className="btn btn-solid">
+                    Explore Services <ArrowRight size={14} />
+                  </Link>
+                  <Link href="/store" className="btn btn-ghost">
+                    <ShoppingCart size={14} /> Visit Bookstore
+                  </Link>
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
 
-        {/* Baseline stat rail */}
-        <Reveal delay={340} className="relative w-full">
+        {/* Baseline rail */}
+        <Reveal delay={400} className="relative w-full">
           <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
             <div className="hair-t grid grid-cols-2 lg:grid-cols-4">
               {badges.map(b => (
                 <div key={b.label} className="py-6 pr-6 flex items-center gap-3.5">
                   <b.icon size={15} className="text-[var(--blue)] shrink-0" />
                   <div>
-                    <p className="text-[var(--ink)] text-[12px] font-medium leading-tight">{b.label}</p>
-                    <p className="mono text-[10px] text-[var(--faint)] leading-tight mt-0.5">{b.sub}</p>
+                    <p className="text-[var(--ink)] text-[12.5px] font-medium leading-tight">{b.label}</p>
+                    <p className="text-[11px] text-[var(--faint)] leading-tight mt-0.5">{b.sub}</p>
                   </div>
                 </div>
               ))}
@@ -116,7 +114,7 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={120} className="lg:col-span-5">
-              <h2 className="display text-[var(--ink)] text-[clamp(1.9rem,3.6vw,3rem)] font-semibold mb-8">
+              <h2 className="display text-[var(--ink)] text-[clamp(1.9rem,3.6vw,3rem)] mb-8">
                 A technology company
                 <br />
                 <span className="text-[var(--blue)]">built by an engineer</span>
@@ -149,54 +147,7 @@ export default function HomePage() {
             <Eyebrow num="02" label="What we build" className="mb-14" />
           </Reveal>
 
-          <div className="flex flex-col gap-20 lg:gap-28">
-            {capabilities.map((c, i) => (
-              <Reveal key={c.title}>
-                <Link href={c.link} className="group grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                  <div className={`lg:col-span-7 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                    <div className="plate aspect-[16/10]">
-                      <Image
-                        src={c.image}
-                        alt={c.title}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 58vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/60 to-transparent" />
-                    </div>
-                  </div>
-
-                  <div className={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                    <span className="mono text-[11px] text-[var(--faint)] tracking-[0.2em]">
-                      {String(i + 1).padStart(2, '0')} / {String(capabilities.length).padStart(2, '0')}
-                    </span>
-
-                    <h3 className="display text-[var(--ink)] text-[clamp(1.6rem,2.8vw,2.3rem)] font-semibold mt-5 mb-5">
-                      {c.title}
-                    </h3>
-
-                    <p className="text-[var(--muted)] text-[15px] leading-[1.9] mb-8 max-w-sm">
-                      {c.desc}
-                    </p>
-
-                    <ul className="grid grid-cols-2 gap-x-6 gap-y-3 mb-9 max-w-sm">
-                      {c.checks.map(ck => (
-                        <li key={ck} className="flex items-center gap-2.5 text-[13px] text-[var(--ink-2)]">
-                          <CheckCircle2 size={13} className="text-[var(--blue)] shrink-0" />
-                          {ck}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <span className="navlink mono text-[11px] tracking-[0.18em] uppercase text-[var(--blue)] inline-flex items-center gap-2">
-                      {c.linkText}{' '}
-                      <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+          <CapabilityGrid />
         </div>
       </section>
 
@@ -222,7 +173,7 @@ export default function HomePage() {
 
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <Reveal className="lg:col-span-7">
-              <h2 className="display text-[var(--ink)] text-[clamp(2rem,4.6vw,3.6rem)] font-semibold mb-8">
+              <h2 className="display text-[var(--ink)] text-[clamp(2rem,4.6vw,3.6rem)] mb-8">
                 A free multilingual
                 <br />
                 <span className="text-[var(--blue)]">learning platform</span>
@@ -289,7 +240,7 @@ export default function HomePage() {
                   <span className="mono text-[10px] tracking-[0.22em] uppercase text-[var(--blue)]">
                     Available now · eBook
                   </span>
-                  <h3 className="display text-[var(--ink)] text-[clamp(1.7rem,3vw,2.4rem)] font-semibold mt-4">
+                  <h3 className="display text-[var(--ink)] text-[clamp(1.7rem,3vw,2.4rem)] mt-4">
                     Robotique Moderne
                   </h3>
                   <p className="text-[var(--muted)] text-[15px] italic mt-1 mb-6">
@@ -308,7 +259,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-center gap-6 flex-wrap">
-                    <span className="display text-[var(--ink)] text-3xl font-semibold">$9.99</span>
+                    <span className="display text-[var(--ink)] text-3xl">$9.99</span>
                     <Link href="/store" className="btn btn-solid">
                       Buy Now <ArrowRight size={14} />
                     </Link>
@@ -380,7 +331,7 @@ export default function HomePage() {
 
           <div className="grid lg:grid-cols-12 gap-14 lg:gap-24">
             <Reveal className="lg:col-span-5">
-              <h2 className="display text-[var(--ink)] text-[clamp(1.9rem,4vw,3.2rem)] font-semibold mb-8">
+              <h2 className="display text-[var(--ink)] text-[clamp(1.9rem,4vw,3.2rem)] mb-8">
                 Have a project
                 <br />
                 in mind?
