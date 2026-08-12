@@ -7,11 +7,11 @@ import { ShoppingCart, ArrowRight, CheckCircle2, Bell, Download, BookOpen, Wrenc
 
 const books = [
   { title: 'Robotique Moderne', sub: 'Complete Robotics Guide · French', price: '$9.99', tag: 'Available', img: '/representation.png', real: true },
-  { title: 'Arduino Mastery', sub: 'Fundamentals & Projects', price: '$19.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1553406830-ef2513450d76?w=400&h=520&fit=crop', real: false },
-  { title: 'ESP32 In Action', sub: 'Advanced IoT Guide', price: '$19.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=520&fit=crop', real: false },
-  { title: 'Drone Technology', sub: 'Build & Program Drones', price: '$24.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400&h=520&fit=crop', real: false },
-  { title: 'AI & ML Guide', sub: 'Machine Learning Basics', price: '$19.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=520&fit=crop', real: false },
-  { title: 'Python for Engineers', sub: 'Zero to Automation', price: '$14.99', tag: 'Coming 2027', img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=520&fit=crop', real: false },
+  { title: 'Arduino Mastery', sub: 'Fundamentals & Projects', price: '$19.99', tag: 'Coming 2027', img: '/arduino-cover.png', real: false },
+  { title: 'ESP32 In Action', sub: 'Advanced IoT Guide', price: '$19.99', tag: 'Coming 2027', img: '/esp32-cover.png', real: false },
+  { title: 'Drone Technology', sub: 'Build & Program Drones', price: '$24.99', tag: 'Coming 2027', img: '/drone-cover.png', real: false },
+  { title: 'AI & ML Guide', sub: 'Machine Learning Basics', price: '$19.99', tag: 'Coming 2027', img: '/ai-ml-cover.png', real: false },
+  { title: 'Python for Engineers', sub: 'Zero to Automation', price: '$14.99', tag: 'Coming 2027', img: '/python-cover.png', real: false },
 ]
 
 const chapters = [
@@ -131,12 +131,17 @@ export default function StorePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {books.map(b => (
               <div key={b.title} className="group bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="relative h-48 overflow-hidden">
-                  <Image src={b.img} alt={b.title} fill className={`object-cover group-hover:scale-105 transition-transform duration-500 ${b.real ? '' : 'opacity-80'}`} />
-                  {!b.real && <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />}
-                  <span className={`absolute top-2 left-2 text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded ${
-                    b.tag === 'Available' ? 'bg-[#1a3ab5] text-white' : 'bg-slate-200 text-slate-600'
-                  }`}>{b.tag}</span>
+                <div className="relative overflow-hidden">
+                  <Image src={b.img} alt={b.title} width={400} height={520} className={`w-full h-auto group-hover:scale-105 transition-transform duration-500 ${!b.real ? 'brightness-50' : ''}`} />
+                  {b.real ? (
+                    <span className="absolute top-2 left-2 text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-[#1a3ab5] text-white">{b.tag}</span>
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                      <span className="text-4xl">🔒</span>
+                      <span className="text-white font-extrabold text-base tracking-wide uppercase">Coming Soon</span>
+                      <span className="text-slate-300 text-[11px] font-semibold tracking-widest uppercase">2027</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-5">
                   <p className="text-slate-900 font-bold text-sm">{b.title}</p>

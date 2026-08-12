@@ -9,14 +9,55 @@
   --color-dark-mid: #101845;
   --color-surface: #f0f4ff;
   --color-silver: #94a3b8;
+
+  /* Redesign tokens — dark premium engineering palette */
+  --color-ink: #04070f;
+  --color-ink-2: #070d1e;
+  --color-panel: #0b1226;
+  --color-line: #1b2745;
+  --color-electric: #3d7bff;
+  --color-mist: #8d9ab8;
 }
 
 html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
 ::selection { background: #1a3ab5; color: white; }
 
+/* ── Shared hero band (used by /about, /services, /courses, /contact, /privacy, /terms) ── */
 .hero-bg {
-  background: linear-gradient(135deg, #0a1033 0%, #101845 50%, #0d1540 100%);
+  background:
+    radial-gradient(120% 140% at 15% 0%, rgba(61,123,255,0.16) 0%, transparent 55%),
+    linear-gradient(135deg, #04070f 0%, #0a1233 55%, #070d1e 100%);
+  position: relative;
 }
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(140,170,255,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140,170,255,0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(90% 80% at 50% 20%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(90% 80% at 50% 20%, #000 0%, transparent 78%);
+  pointer-events: none;
+}
+.hero-bg > * { position: relative; z-index: 1; }
+
+/* ── Engineering grid texture ── */
+.da-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(140,170,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140,170,255,0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(100% 75% at 50% 40%, #000 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(100% 75% at 50% 40%, #000 0%, transparent 80%);
+  pointer-events: none;
+}
+.da-grid { position: relative; }
 
 .circuit-dots::before {
   content: '';
@@ -28,6 +69,46 @@ html { scroll-behavior: smooth; }
 }
 .circuit-dots { position: relative; }
 
+/* ── Dark glass panel ── */
+.da-panel {
+  background: linear-gradient(160deg, rgba(24,35,68,0.88) 0%, rgba(12,19,40,0.88) 100%);
+  border: 1px solid rgba(125,160,235,0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hairline that brightens on hover — used by the destination cards */
+.da-card {
+  position: relative;
+  transition: border-color .35s ease, transform .35s ease, background-color .35s ease;
+}
+.da-card::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #3d7bff, transparent);
+  transform: scaleX(0);
+  transition: transform .45s cubic-bezier(.2,.7,.3,1);
+}
+.da-card:hover::after { transform: scaleX(1); }
+
+/* Nav link underline movement */
+.da-navlink { position: relative; }
+.da-navlink::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 1.5px;
+  background: #3d7bff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.da-navlink:hover::after,
+.da-navlink[data-active='true']::after { transform: scaleX(1); }
+
+/* ── Buttons (kept: used by /services, /courses, /contact) ── */
 .btn-brand {
   background: linear-gradient(135deg, #1a3ab5, #2952d9);
   color: white;
@@ -51,7 +132,12 @@ html { scroll-behavior: smooth; }
   color: white;
 }
 
+/* Thin scrollbar for the horizontal destination strip on touch devices */
+.da-scroll::-webkit-scrollbar { height: 0; }
+.da-scroll { scrollbar-width: none; }
+
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

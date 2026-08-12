@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local pre-redesign backup
+.backup-pre-redesign/
+
+# oversized binary — exceeds GitHub 100MB limit, host externally
+public/Robotique_Moderne_Web.pdf

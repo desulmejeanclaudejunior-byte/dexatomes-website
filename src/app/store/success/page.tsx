@@ -24,7 +24,13 @@ export default function SuccessPage() {
               href="/Robotique_Moderne.epub"
               download="Robotique_Moderne.epub"
               className="w-full inline-flex items-center justify-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-blue-900/20">
-              <Download size={16} /> Download eBook
+              <Download size={16} /> Download eBook (.epub)
+            </a>
+            <a
+              href="/Robotique_Moderne_Web.pdf"
+              download="Robotique_Moderne_Web.pdf"
+              className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-[#1a3ab5] border border-[#1a3ab5] font-semibold py-3 px-6 rounded-lg transition-colors">
+              <Download size={16} /> Download PDF (Web version)
             </a>
           </div>
 
