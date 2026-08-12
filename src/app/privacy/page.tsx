@@ -7,17 +7,19 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="pt-16">
-      <section className="hero-bg py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-blue-300 text-sm font-semibold tracking-wider uppercase mb-3">Legal</p>
-          <h1 className="text-white text-4xl md:text-5xl font-bold tracking-tight mb-4">Privacy Policy</h1>
-          <p className="text-slate-400 max-w-md mx-auto text-lg">DEXUS Lab — DexAtomes LLC</p>
-          <p className="text-slate-500 text-sm mt-3">Last updated: July 2025</p>
+    <div className="legal">
+      <section className="hero-bg grid-tex pt-36 pb-16 lg:pt-44 lg:pb-20 px-6 sm:px-10">
+        <div className="max-w-[1400px] mx-auto">
+          <p className="mono text-[11px] tracking-[0.26em] uppercase text-[var(--blue)] mb-8">Legal</p>
+          <h1 className="display text-[var(--ink)] text-[clamp(2.25rem,5.5vw,4rem)] font-semibold mb-6">
+            Privacy Policy
+          </h1>
+          <p className="text-[var(--muted)] text-[16px]">DEXUS Lab — DexAtomes LLC</p>
+          <p className="mono text-[11px] text-[var(--faint)] mt-3">Last updated: July 2025</p>
         </div>
       </section>
 
-      <section className="py-20 bg-white px-6">
+      <section className="py-20 lg:py-28 px-6 sm:px-10 hair-t">
         <div className="max-w-3xl mx-auto prose prose-slate max-w-none">
 
           <div className="text-slate-600 leading-relaxed space-y-8">

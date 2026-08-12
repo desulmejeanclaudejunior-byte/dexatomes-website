@@ -1,54 +1,146 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Award, Rocket, Zap, Target, Mail, Phone, MapPin } from 'lucide-react'
+import Link from 'next/link'
+import { Award, Rocket, Zap, Target, ArrowRight } from 'lucide-react'
+
+import Reveal from '@/components/Reveal'
+import Eyebrow from '@/components/Eyebrow'
+import { values, contact } from '@/content/site'
 
 export const metadata: Metadata = { title: 'About' }
 
+const credentials = [
+  { icon: Award, label: 'IT & Security Certified' },
+  { icon: Target, label: 'Global service reach' },
+  { icon: Zap, label: 'Fast, quality delivery' },
+  { icon: Rocket, label: 'DexusLab & Access Lab' },
+]
+
 export default function AboutPage() {
   return (
-    <div className="pt-16">
-      <section className="hero-bg py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-blue-300 text-sm font-semibold tracking-wider uppercase mb-3">About</p>
-          <h1 className="text-white text-4xl md:text-5xl font-bold tracking-tight mb-4">Built by an engineer</h1>
-          <p className="text-slate-400 max-w-md mx-auto text-lg">Building the future through technology, education, and innovation.</p>
+    <>
+      {/* Masthead */}
+      <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
+        <div className="absolute inset-0 hero-bg -z-10" />
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <Reveal>
+            <Eyebrow num="01" label="About" className="mb-12" />
+          </Reveal>
+          <Reveal delay={90}>
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[14ch]">
+              Built by an <span className="text-[var(--blue)]">engineer</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={170}>
+            <p className="text-[var(--muted)] text-[17px] leading-[1.85] mt-8 max-w-lg">
+              Building the future through technology, education, and innovation.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="py-20 bg-white px-6">
-        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12">
-          <div>
-            <Image src="/logo.png" alt="Dex Atomes" width={200} height={80} className="h-16 w-auto mb-6" />
-            <h2 className="text-slate-900 text-2xl font-bold mb-1">Jean-Claude Junior Desulme</h2>
-            <p className="text-[#1a3ab5] font-semibold text-sm mb-6">Founder & CEO — Dex Atomes LLC</p>
-            <p className="text-slate-500 leading-relaxed mb-4">Dex Atomes LLC is a technology company delivering software development, robotics engineering, and technical education for businesses and builders worldwide.</p>
-            <p className="text-slate-500 leading-relaxed mb-8">From DexusLab to Robotique Moderne to custom software — everything we build is designed to empower the next generation of engineers and innovators.</p>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {[
-                { icon: Award, label: 'IT & Security Certified' },
-                { icon: Target, label: 'Global service reach' },
-                { icon: Zap, label: 'Fast, quality delivery' },
-                { icon: Rocket, label: 'DexusLab & Access Lab' },
-              ].map(i => (
-                <div key={i.label} className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-[#1a3ab5]/10 rounded-lg flex items-center justify-center shrink-0">
-                    <i.icon size={14} className="text-[#1a3ab5]" />
+      {/* Founder */}
+      <section className="py-20 lg:py-24 hair-t">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            <Reveal className="lg:col-span-6">
+              <div className="plate ticks aspect-[4/5]">
+                <Image
+                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1000&h=1250&fit=crop"
+                  alt="Engineering workbench"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 48vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/70 via-transparent to-transparent" />
+              </div>
+            </Reveal>
+
+            <Reveal delay={120} className="lg:col-span-6">
+              <Image
+                src="/logo-dark.png"
+                alt="Dex Atomes"
+                width={200}
+                height={54}
+                className="h-11 w-auto mb-10"
+              />
+              <h2 className="display text-[var(--ink)] text-[clamp(1.7rem,3vw,2.5rem)] font-semibold mb-2">
+                Jean-Claude Junior Desulme
+              </h2>
+              <p className="mono text-[11px] tracking-[0.2em] uppercase text-[var(--blue)] mb-10">
+                Founder &amp; CEO — Dex Atomes LLC
+              </p>
+
+              <p className="text-[var(--muted)] text-[15.5px] leading-[1.9] mb-6">
+                Dex Atomes LLC is a technology company delivering software development, robotics
+                engineering, and technical education for businesses and builders worldwide.
+              </p>
+              <p className="text-[var(--muted)] text-[15.5px] leading-[1.9] mb-12">
+                From DexusLab to Robotique Moderne to custom software — everything we build is
+                designed to empower the next generation of engineers and innovators.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-px bg-[var(--hair)] border border-[var(--hair)] mb-12">
+                {credentials.map(c => (
+                  <div key={c.label} className="bg-[var(--bg)] flex items-center gap-3.5 px-5 py-5">
+                    <c.icon size={15} className="text-[var(--blue)] shrink-0" />
+                    <span className="text-[var(--ink-2)] text-[13.5px]">{c.label}</span>
                   </div>
-                  <span className="text-slate-600 text-sm">{i.label}</span>
+                ))}
+              </div>
+
+              <div className="hair-t">
+                <a href={`mailto:${contact.email}`} className="group flex items-center justify-between py-4 hair-b">
+                  <span className="mono text-[13px] text-[var(--ink-2)] group-hover:text-[var(--blue)] transition-colors">
+                    {contact.email}
+                  </span>
+                  <ArrowRight size={13} className="text-[var(--faint)] group-hover:text-[var(--blue)] transition-colors" />
+                </a>
+                <a href="tel:+18632078619" className="group flex items-center justify-between py-4 hair-b">
+                  <span className="mono text-[13px] text-[var(--ink-2)] group-hover:text-[var(--blue)] transition-colors">
+                    {contact.phone}
+                  </span>
+                  <ArrowRight size={13} className="text-[var(--faint)] group-hover:text-[var(--blue)] transition-colors" />
+                </a>
+                <div className="py-4 hair-b">
+                  <span className="mono text-[13px] text-[var(--faint)]">Orlando, Florida</span>
                 </div>
-              ))}
-            </div>
-            <div className="space-y-2 text-sm text-slate-600">
-              <div className="flex items-center gap-2"><Mail size={14} className="text-[#1a3ab5]" /> support@dexuslab.com</div>
-              <div className="flex items-center gap-2"><Phone size={14} className="text-[#1a3ab5]" /> (863) 207-8619</div>
-              <div className="flex items-center gap-2"><MapPin size={14} className="text-[#1a3ab5]" /> Orlando, Florida</div>
-            </div>
-          </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-xl">
-            <Image src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=700&fit=crop" alt="Engineering" width={600} height={700} className="w-full h-full object-cover" />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
-    </div>
+
+      {/* Principles */}
+      <section className="py-20 lg:py-24 hair-t">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <Reveal>
+            <Eyebrow num="02" label="How we work" className="mb-14" />
+          </Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-px bg-[var(--hair)] border border-[var(--hair)]">
+            {values.map((v, i) => (
+              <Reveal key={v.title} delay={i * 60}>
+                <div className="bg-[var(--bg)] h-full px-7 py-9">
+                  <v.icon size={17} className="text-[var(--blue)] mb-7" />
+                  <p className="text-[var(--ink)] text-[14px] font-medium leading-snug mb-2.5">{v.title}</p>
+                  <p className="text-[var(--muted)] text-[12.5px] leading-relaxed">{v.sub}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={200}>
+            <div className="flex flex-wrap gap-4 mt-16">
+              <Link href="/services" className="btn btn-solid">
+                Explore Services <ArrowRight size={14} />
+              </Link>
+              <Link href="/contact" className="btn btn-ghost">
+                Get in Touch
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </>
   )
 }

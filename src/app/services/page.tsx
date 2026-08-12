@@ -1,54 +1,111 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Globe, Smartphone, Cpu, Shield, Wrench, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+
+import Reveal from '@/components/Reveal'
+import Eyebrow from '@/components/Eyebrow'
+import { services } from '@/content/site'
 
 export const metadata: Metadata = { title: 'Services' }
 
-const services = [
-  { icon: Globe, title: 'Website Development', price: 'From $500', desc: 'Professional websites, web apps, e-commerce, SaaS. Built with Next.js, React, TypeScript.', img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop' },
-  { icon: Smartphone, title: 'Mobile App Development', price: 'From $800', desc: 'Native-quality iOS & Android apps. React Native, Expo, Firebase backend.', img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop' },
-  { icon: Cpu, title: 'Robotics & IoT', price: 'From $300', desc: 'Custom hardware, Arduino, ESP32, PCB prototyping, drones, smart devices.', img: 'https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=500&h=300&fit=crop' },
-  { icon: Shield, title: 'IT & Network Security', price: 'From $200', desc: 'Security audits, network setup, infrastructure monitoring and hardening.', img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&h=300&fit=crop' },
-  { icon: Wrench, title: 'Technical Consulting', price: '$100/hr', desc: 'Architecture, code reviews, system design, technology strategy.', img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=300&fit=crop' },
-]
-
 export default function ServicesPage() {
   return (
-    <div className="pt-16">
-      <section className="hero-bg py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-blue-300 text-sm font-semibold tracking-wider uppercase mb-3">Services</p>
-          <h1 className="text-white text-4xl md:text-5xl font-bold tracking-tight mb-4">What we build for you</h1>
-          <p className="text-slate-400 max-w-md mx-auto text-lg">End-to-end digital solutions from concept to deployment.</p>
+    <>
+      {/* Masthead */}
+      <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
+        <div className="absolute inset-0 hero-bg -z-10" />
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <Reveal>
+            <Eyebrow num="01" label="Services" className="mb-12" />
+          </Reveal>
+          <Reveal delay={90}>
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[16ch]">
+              What we build <span className="text-[var(--blue)]">for you</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={170}>
+            <p className="text-[var(--muted)] text-[17px] leading-[1.85] mt-8 max-w-lg">
+              End-to-end digital solutions from concept to deployment.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="py-20 bg-white px-6">
-        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map(s => (
-            <div key={s.title} className="group bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
-              <div className="relative h-40 overflow-hidden">
-                <Image src={s.img} alt={s.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
-                <div className="absolute top-3 left-3 w-9 h-9 bg-[#1a3ab5] rounded-lg flex items-center justify-center shadow">
-                  <s.icon size={16} className="text-white" />
+      {/* Service scenes — each row is an editorial band, not a card */}
+      <section className="hair-t">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          {services.map((s, i) => (
+            <Reveal key={s.title}>
+              <article className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center py-16 lg:py-24 hair-b">
+                <div className={`lg:col-span-6 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className="plate aspect-[16/10]">
+                    <Image
+                      src={s.img}
+                      alt={s.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/55 to-transparent" />
+                  </div>
                 </div>
-              </div>
-              <div className="p-5">
-                <h3 className="text-slate-900 font-bold mb-1">{s.title}</h3>
-                <p className="text-[#1a3ab5] text-sm font-semibold mb-2">{s.price}</p>
-                <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
-              </div>
-            </div>
+
+                <div className={`lg:col-span-6 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="mono text-[11px] text-[var(--faint)] tracking-[0.2em]">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <s.icon size={16} className="text-[var(--blue)]" />
+                  </div>
+
+                  <h2 className="display text-[var(--ink)] text-[clamp(1.6rem,3vw,2.4rem)] font-semibold mb-4">
+                    {s.title}
+                  </h2>
+
+                  <p className="mono text-[12px] tracking-[0.16em] uppercase text-[var(--blue)] mb-7">
+                    {s.price}
+                  </p>
+
+                  <p className="text-[var(--muted)] text-[15.5px] leading-[1.9] max-w-md mb-9">
+                    {s.desc}
+                  </p>
+
+                  <Link
+                    href="/contact"
+                    className="navlink mono text-[11px] tracking-[0.18em] uppercase text-[var(--ink-2)] inline-flex items-center gap-2 hover:text-[var(--blue)] transition-colors"
+                  >
+                    Request a Quote <ArrowRight size={13} />
+                  </Link>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
-        <div className="text-center mt-12">
-          <Link href="/contact" className="group btn-brand inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm">
-            Request a Quote <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-          </Link>
+      </section>
+
+      {/* Close */}
+      <section className="py-24 lg:py-32">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <Reveal>
+            <h2 className="display text-[var(--ink)] text-[clamp(1.8rem,4vw,3rem)] font-semibold mb-8 max-w-[18ch]">
+              Have something else in mind?
+            </h2>
+            <p className="text-[var(--muted)] text-[15.5px] leading-[1.9] max-w-md mb-11">
+              If your project falls outside these categories, get in touch and we&#39;ll talk it
+              through.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/contact" className="btn btn-solid">
+                Request a Quote <ArrowRight size={14} />
+              </Link>
+              <Link href="/store" className="btn btn-ghost">
+                Visit Bookstore
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
-    </div>
+    </>
   )
 }

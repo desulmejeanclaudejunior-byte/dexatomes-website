@@ -1,76 +1,77 @@
-'use client'
+import type { Metadata } from 'next'
+import { ArrowRight } from 'lucide-react'
 
-import { useState } from 'react'
-import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import Reveal from '@/components/Reveal'
+import Eyebrow from '@/components/Eyebrow'
+import ContactForm from '@/components/ContactForm'
+import { contact } from '@/content/site'
+
+export const metadata: Metadata = { title: 'Contact' }
+
+/* This page's select values differ slightly from the homepage form's and are
+   preserved as they were. */
+const options = ['Website Development', 'Mobile App', 'Robotics', 'Consulting', 'Bookstore', 'Other']
 
 export default function ContactPage() {
-  const [sent, setSent] = useState(false)
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const data = Object.fromEntries(new FormData(e.currentTarget))
-    await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-    setSent(true)
-  }
-
   return (
-    <div className="pt-16">
-      <section className="hero-bg py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-blue-300 text-sm font-semibold tracking-wider uppercase mb-3">Contact</p>
-          <h1 className="text-white text-4xl md:text-5xl font-bold tracking-tight mb-4">Get in touch</h1>
-          <p className="text-slate-400 max-w-md mx-auto text-lg">Have a project? Need a consultation? Let&#39;s talk.</p>
+    <>
+      {/* Masthead */}
+      <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
+        <div className="absolute inset-0 hero-bg -z-10" />
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <Reveal>
+            <Eyebrow num="01" label="Contact" className="mb-12" />
+          </Reveal>
+          <Reveal delay={90}>
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[12ch]">
+              Get in <span className="text-[var(--blue)]">touch</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={170}>
+            <p className="text-[var(--muted)] text-[17px] leading-[1.85] mt-8 max-w-lg">
+              Have a project? Need a consultation? Let&#39;s talk.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <section className="py-20 bg-[#f0f4ff] px-6">
-        <div className="max-w-4xl mx-auto grid lg:grid-cols-5 gap-8">
-          <div className="lg:col-span-2 space-y-4">
-            <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm">
-              <p className="text-slate-500 text-sm leading-relaxed mb-5">We respond within 24 hours.</p>
-              {[
-                { icon: Mail, label: 'support@dexuslab.com' },
-                { icon: Phone, label: '(863) 207-8619' },
-                { icon: MapPin, label: 'Orlando, Florida' },
-              ].map(c => (
-                <div key={c.label} className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 bg-[#1a3ab5]/10 rounded-lg flex items-center justify-center shrink-0"><c.icon size={16} className="text-[#1a3ab5]" /></div>
-                  <span className="text-slate-700 text-sm">{c.label}</span>
-                </div>
-              ))}
-              <div className="border-t border-slate-100 mt-4 pt-4">
-                <p className="text-slate-400 text-xs">@DexAtomes on all platforms</p>
-              </div>
-            </div>
-          </div>
+      <section className="py-20 lg:py-24 hair-t">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <div className="grid lg:grid-cols-12 gap-14 lg:gap-24">
+            <Reveal className="lg:col-span-5">
+              <p className="text-[var(--muted)] text-[15.5px] leading-[1.9] mb-12 max-w-sm">
+                We respond within 24 hours.
+              </p>
 
-          <div className="lg:col-span-3">
-            {sent ? (
-              <div className="bg-white rounded-2xl border border-slate-100 p-10 text-center shadow-sm">
-                <Send size={32} className="text-[#1a3ab5] mx-auto mb-4" />
-                <h3 className="text-slate-900 text-xl font-bold mb-2">Sent!</h3>
-                <p className="text-slate-500 text-sm">We&#39;ll respond within 24 hours.</p>
+              <div className="hair-t">
+                <a href={`mailto:${contact.email}`} className="group flex items-center justify-between py-5 hair-b">
+                  <span className="mono text-[13px] text-[var(--ink-2)] group-hover:text-[var(--blue)] transition-colors">
+                    {contact.email}
+                  </span>
+                  <ArrowRight size={13} className="text-[var(--faint)] group-hover:text-[var(--blue)] transition-colors" />
+                </a>
+                <a href="tel:+18632078619" className="group flex items-center justify-between py-5 hair-b">
+                  <span className="mono text-[13px] text-[var(--ink-2)] group-hover:text-[var(--blue)] transition-colors">
+                    {contact.phone}
+                  </span>
+                  <ArrowRight size={13} className="text-[var(--faint)] group-hover:text-[var(--blue)] transition-colors" />
+                </a>
+                <div className="py-5 hair-b">
+                  <span className="mono text-[13px] text-[var(--faint)]">Orlando, Florida</span>
+                </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-100 p-8 shadow-sm space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div><label className="block text-xs font-semibold text-slate-600 mb-1.5">Name</label><input name="name" required placeholder="Your name" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20" /></div>
-                  <div><label className="block text-xs font-semibold text-slate-600 mb-1.5">Email</label><input name="email" type="email" required placeholder="you@email.com" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20" /></div>
-                </div>
-                <div><label className="block text-xs font-semibold text-slate-600 mb-1.5">Service</label>
-                  <select name="service" className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20">
-                    <option>Website Development</option><option>Mobile App</option><option>Robotics</option><option>Consulting</option><option>Bookstore</option><option>Other</option>
-                  </select>
-                </div>
-                <div><label className="block text-xs font-semibold text-slate-600 mb-1.5">Message</label>
-                  <textarea name="message" rows={4} placeholder="Tell us about your project..." className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#1a3ab5] focus:ring-1 focus:ring-[#1a3ab5]/20 resize-none" />
-                </div>
-                <button type="submit" className="w-full btn-brand py-3 rounded-lg text-sm">Send Message</button>
-              </form>
-            )}
+
+              <p className="mono text-[11px] text-[var(--faint)] mt-10 tracking-[0.12em]">
+                @DexAtomes on all platforms
+              </p>
+            </Reveal>
+
+            <Reveal delay={120} className="lg:col-span-7">
+              <ContactForm options={options} successTitle="Sent!" />
+            </Reveal>
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }

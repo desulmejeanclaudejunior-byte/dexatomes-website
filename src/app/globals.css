@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Legacy brand tokens — kept so existing utility usages keep resolving */
   --color-brand: #1a3ab5;
   --color-brand-dark: #0f1f6b;
   --color-brand-light: #2952d9;
@@ -9,135 +10,278 @@
   --color-dark-mid: #101845;
   --color-surface: #f0f4ff;
   --color-silver: #94a3b8;
-
-  /* Redesign tokens — dark premium engineering palette */
-  --color-ink: #04070f;
-  --color-ink-2: #070d1e;
-  --color-panel: #0b1226;
-  --color-line: #1b2745;
-  --color-electric: #3d7bff;
-  --color-mist: #8d9ab8;
 }
 
-html { scroll-behavior: smooth; }
-body { overflow-x: hidden; }
-::selection { background: #1a3ab5; color: white; }
+/* ══════════════════════════════════════════════════════════
+   DESIGN TOKENS — near-black / graphite with a cobalt accent
+   ══════════════════════════════════════════════════════════ */
+:root {
+  --bg:        #08090c;
+  --surface:   #0e1015;
+  --surface-2: #14171e;
+  --ink:       #eef1f6;
+  --ink-2:     #c2c9d6;
+  --muted:     #868fa0;
+  --faint:     #5c6474;
+  --hair:      #1c2029;
+  --hair-2:    #272d3a;
+  --blue:      #3d7bff;
+  --blue-2:    #6b9aff;
+  --brand:     #1a3ab5;
+}
 
-/* ── Shared hero band (used by /about, /services, /courses, /contact, /privacy, /terms) ── */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: var(--blue); color: #05070a; }
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Type roles ───────────────────────────────────────────── */
+.mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.display {
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+/* ── Numbered eyebrow: 01 ——— LABEL ───────────────────────── */
+.eyebrow { display: flex; align-items: center; gap: 16px; }
+.eyebrow .num {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--blue);
+  letter-spacing: 0.05em;
+}
+.eyebrow .rule { flex: 1; height: 1px; background: var(--hair-2); max-width: 220px; }
+.eyebrow .lbl {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Scroll reveal ────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.85s cubic-bezier(.2,.7,.3,1), transform 0.85s cubic-bezier(.2,.7,.3,1);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── Image plate: images as structure, not decoration ─────── */
+.plate {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.plate img {
+  transition: transform 1.1s cubic-bezier(.2,.7,.3,1), filter 0.7s ease;
+  filter: grayscale(28%) contrast(1.05);
+}
+.plate:hover img,
+a:hover .plate img,
+a:focus-visible .plate img { transform: scale(1.05); filter: grayscale(0%) contrast(1.05); }
+
+/* Corner instrument ticks */
+.ticks::before,
+.ticks::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 22px;
+  pointer-events: none;
+  opacity: .55;
+}
+.ticks::before {
+  top: 14px; left: 14px;
+  border-top: 1px solid var(--blue);
+  border-left: 1px solid var(--blue);
+}
+.ticks::after {
+  bottom: 14px; right: 14px;
+  border-bottom: 1px solid var(--blue);
+  border-right: 1px solid var(--blue);
+}
+
+/* ── Hairline separators ──────────────────────────────────── */
+.hair-t { border-top: 1px solid var(--hair); }
+.hair-b { border-bottom: 1px solid var(--hair); }
+
+/* ── Nav underline grow ───────────────────────────────────── */
+.navlink { position: relative; }
+.navlink::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -6px;
+  width: 0; height: 1px;
+  background: var(--blue);
+  transition: width .35s cubic-bezier(.2,.7,.3,1);
+}
+.navlink:hover::after,
+.navlink[data-active='true']::after { width: 100%; }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+/* `:not(.hidden)` so Tailwind's responsive `hidden` utility still wins —
+   otherwise this rule would out-order `display:none` and leak the button in. */
+.btn:not(.hidden) {
+  display: inline-flex;
+}
+.btn {
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 16px 28px;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.btn-solid { background: var(--blue); color: #05070a; }
+.btn-solid:hover { background: var(--blue-2); }
+.btn-ghost { border: 1px solid var(--hair-2); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--blue); background: rgba(61,123,255,.07); }
+.btn svg { transition: transform .3s ease; }
+.btn:hover svg { transform: translateX(4px); }
+
+/* ── Underline-only form fields (reference language) ──────── */
+.field-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+.field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--hair-2);
+  color: var(--ink);
+  padding: 12px 2px;
+  font-size: 15px;
+  transition: border-color .3s ease;
+}
+.field::placeholder { color: var(--faint); }
+.field:focus { outline: none; border-color: var(--blue); }
+select.field { appearance: none; }
+select.field option { background: var(--surface); color: var(--ink); }
+textarea.field { resize: vertical; min-height: 96px; }
+
+/* ── Legacy classes retained for compatibility ────────────── */
 .hero-bg {
   background:
-    radial-gradient(120% 140% at 15% 0%, rgba(61,123,255,0.16) 0%, transparent 55%),
-    linear-gradient(135deg, #04070f 0%, #0a1233 55%, #070d1e 100%);
+    radial-gradient(120% 140% at 15% 0%, rgba(61,123,255,0.14) 0%, transparent 55%),
+    linear-gradient(135deg, #08090c 0%, #0c1330 55%, #0a0d14 100%);
   position: relative;
 }
-.hero-bg::after {
+
+.circuit-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(61,123,255,0.07) 1px, transparent 0);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.circuit-dots { position: relative; }
+
+.btn-brand {
+  background: var(--blue);
+  color: #05070a;
+  font-weight: 600;
+  transition: background .3s ease;
+}
+.btn-brand:hover { background: var(--blue-2); }
+
+.btn-outline-brand {
+  border: 1px solid var(--hair-2);
+  color: var(--ink);
+  font-weight: 600;
+  transition: all .3s ease;
+}
+.btn-outline-brand:hover { border-color: var(--blue); background: rgba(61,123,255,.07); }
+
+/* ── Engineering grid texture ─────────────────────────────── */
+.grid-tex { position: relative; }
+.grid-tex::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
     linear-gradient(rgba(140,170,255,0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(140,170,255,0.045) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(90% 80% at 50% 20%, #000 0%, transparent 78%);
-  -webkit-mask-image: radial-gradient(90% 80% at 50% 20%, #000 0%, transparent 78%);
-  pointer-events: none;
-}
-.hero-bg > * { position: relative; z-index: 1; }
-
-/* ── Engineering grid texture ── */
-.da-grid::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(140,170,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(140,170,255,0.05) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: radial-gradient(100% 75% at 50% 40%, #000 0%, transparent 80%);
-  -webkit-mask-image: radial-gradient(100% 75% at 50% 40%, #000 0%, transparent 80%);
+  mask-image: radial-gradient(100% 70% at 50% 40%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(100% 70% at 50% 40%, #000 0%, transparent 78%);
   pointer-events: none;
 }
-.da-grid { position: relative; }
 
-.circuit-dots::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(26,58,181,0.06) 1px, transparent 0);
-  background-size: 28px 28px;
-  pointer-events: none;
-}
-.circuit-dots { position: relative; }
+/* Horizontal rails hide their scrollbar */
+.rail::-webkit-scrollbar { height: 0; }
+.rail { scrollbar-width: none; }
 
-/* ── Dark glass panel ── */
-.da-panel {
-  background: linear-gradient(160deg, rgba(24,35,68,0.88) 0%, rgba(12,19,40,0.88) 100%);
-  border: 1px solid rgba(125,160,235,0.16);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
+/* ── Legal pages ───────────────────────────────────────────
+   /privacy and /terms are long-form legal documents. Rather than
+   re-typing their markup, this scope remaps the light-mode utility
+   classes they already carry onto the dark palette. Two-class
+   selectors outrank the single-class Tailwind utilities, so the
+   documents restyle without a single word of copy changing.
+   ────────────────────────────────────────────────────────── */
+.legal .text-slate-900,
+.legal .text-slate-800,
+.legal .text-slate-700 { color: var(--ink); }
 
-/* Hairline that brightens on hover — used by the destination cards */
-.da-card {
-  position: relative;
-  transition: border-color .35s ease, transform .35s ease, background-color .35s ease;
-}
-.da-card::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #3d7bff, transparent);
-  transform: scaleX(0);
-  transition: transform .45s cubic-bezier(.2,.7,.3,1);
-}
-.da-card:hover::after { transform: scaleX(1); }
+.legal .text-slate-600,
+.legal .text-slate-500,
+.legal .text-slate-400 { color: var(--muted); }
 
-/* Nav link underline movement */
-.da-navlink { position: relative; }
-.da-navlink::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: -6px;
-  height: 1.5px;
-  background: #3d7bff;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s cubic-bezier(.2,.7,.3,1);
-}
-.da-navlink:hover::after,
-.da-navlink[data-active='true']::after { transform: scaleX(1); }
+.legal .bg-white { background: transparent; }
+.legal .bg-slate-50 { background: var(--surface-2); }
+.legal .border-slate-200 { border-color: var(--hair-2); }
+.legal .rounded-xl { border-radius: 0; }
 
-/* ── Buttons (kept: used by /services, /courses, /contact) ── */
-.btn-brand {
-  background: linear-gradient(135deg, #1a3ab5, #2952d9);
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 4px 20px rgba(26,58,181,0.3);
-  transition: all 0.3s;
-}
-.btn-brand:hover {
-  box-shadow: 0 6px 30px rgba(26,58,181,0.45);
-  transform: translateY(-1px);
+.legal h2 {
+  letter-spacing: -0.02em;
+  font-size: 1.0625rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--hair);
 }
 
-.btn-outline-brand {
-  border: 2px solid #1a3ab5;
-  color: #1a3ab5;
-  font-weight: 600;
-  transition: all 0.3s;
-}
-.btn-outline-brand:hover {
-  background: #1a3ab5;
-  color: white;
-}
+.legal a[href^="mailto"],
+.legal a[href^="http"] { color: var(--blue); }
+.legal a[href^="mailto"]:hover,
+.legal a[href^="http"]:hover { text-decoration: underline; }
 
-/* Thin scrollbar for the horizontal destination strip on touch devices */
-.da-scroll::-webkit-scrollbar { height: 0; }
-.da-scroll { scrollbar-width: none; }
+.legal li { line-height: 1.85; }
+.legal p { line-height: 1.9; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;

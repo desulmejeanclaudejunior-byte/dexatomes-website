@@ -2,57 +2,91 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle2, Download, BookOpen, Mail } from 'lucide-react'
+import { CheckCircle2, Download, BookOpen, Mail, ArrowRight } from 'lucide-react'
+
+import Reveal from '@/components/Reveal'
 
 export default function SuccessPage() {
   return (
-    <div className="mt-[72px] min-h-screen bg-[#f0f4ff]">
-      <div className="max-w-2xl mx-auto px-6 py-20">
-        <div className="bg-white rounded-2xl border border-slate-100 p-8 md:p-12 shadow-sm text-center">
-          <CheckCircle2 size={48} className="text-green-500 mx-auto mb-4" />
-          <h1 className="text-slate-900 text-2xl font-bold mb-2">Purchase Complete!</h1>
-          <p className="text-slate-500 mb-8">Thank you for buying Robotique Moderne. Your eBook is ready to download.</p>
+    <section className="relative min-h-[100svh] flex items-center pt-32 pb-24 grid-tex overflow-hidden">
+      <div className="absolute inset-0 hero-bg -z-10" />
 
-          <div className="flex justify-center mb-8">
-            <div className="w-32 rounded-xl overflow-hidden shadow-lg border border-slate-200">
-              <Image src="/representation.png" alt="Robotique Moderne" width={200} height={300} className="w-full h-auto" />
+      <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10">
+        <div className="grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+          <Reveal className="lg:col-span-4">
+            <div className="plate ticks aspect-[2/3] max-w-[300px]">
+              <Image
+                src="/representation.png"
+                alt="Robotique Moderne"
+                fill
+                sizes="300px"
+                className="object-cover"
+                priority
+              />
             </div>
-          </div>
+          </Reveal>
 
-          <div className="space-y-3 mb-8">
-            <a
-              href="/Robotique_Moderne.epub"
-              download="Robotique_Moderne.epub"
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-blue-900/20">
-              <Download size={16} /> Download eBook (.epub)
-            </a>
-            <a
-              href="/Robotique_Moderne_Web.pdf"
-              download="Robotique_Moderne_Web.pdf"
-              className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-[#1a3ab5] border border-[#1a3ab5] font-semibold py-3 px-6 rounded-lg transition-colors">
-              <Download size={16} /> Download PDF (Web version)
-            </a>
-          </div>
+          <Reveal delay={120} className="lg:col-span-8">
+            <div className="flex items-center gap-3 mb-8">
+              <CheckCircle2 size={18} className="text-[var(--blue)]" />
+              <span className="mono text-[11px] tracking-[0.24em] uppercase text-[var(--blue)]">
+                Purchase Complete
+              </span>
+            </div>
 
-          <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6">
-            <div className="flex items-start gap-3 text-left">
-              <Mail size={18} className="text-[#1a3ab5] shrink-0 mt-0.5" />
+            <h1 className="display text-[var(--ink)] text-[clamp(2rem,5vw,3.8rem)] font-semibold mb-7 max-w-[16ch]">
+              Your eBook is ready
+            </h1>
+
+            <p className="text-[var(--muted)] text-[16px] leading-[1.85] mb-12 max-w-md">
+              Thank you for buying Robotique Moderne. Download your copy below.
+            </p>
+
+            {/* Download destinations unchanged */}
+            <div className="flex flex-wrap gap-4 mb-12">
+              <a
+                href="/Robotique_Moderne.epub"
+                download="Robotique_Moderne.epub"
+                className="btn btn-solid"
+              >
+                <Download size={15} /> Download .epub
+              </a>
+              <a
+                href="/Robotique_Moderne_Web.pdf"
+                download="Robotique_Moderne_Web.pdf"
+                className="btn btn-ghost"
+              >
+                <Download size={15} /> Download PDF
+              </a>
+            </div>
+
+            <div className="hair-t hair-b py-6 flex items-start gap-4 mb-12 max-w-lg">
+              <Mail size={16} className="text-[var(--blue)] shrink-0 mt-0.5" />
               <div>
-                <p className="text-slate-700 text-sm font-semibold">Check your email</p>
-                <p className="text-slate-500 text-xs mt-0.5">A confirmation with the download link has been sent to your email address.</p>
+                <p className="text-[var(--ink)] text-[14px] mb-1">Check your email</p>
+                <p className="text-[var(--muted)] text-[13px] leading-relaxed">
+                  A confirmation with the download link has been sent to your email address.
+                </p>
               </div>
             </div>
-          </div>
 
-          <div className="flex items-center justify-center gap-4 text-sm">
-            <Link href="/store" className="text-[#1a3ab5] font-semibold hover:text-[#2348c7] flex items-center gap-1">
-              <BookOpen size={14} /> Browse more books
-            </Link>
-            <span className="text-slate-300">|</span>
-            <Link href="/" className="text-slate-500 hover:text-slate-700">Home</Link>
-          </div>
+            <div className="flex flex-wrap gap-8">
+              <Link
+                href="/store"
+                className="navlink mono text-[11px] tracking-[0.18em] uppercase text-[var(--blue)] inline-flex items-center gap-2"
+              >
+                <BookOpen size={13} /> Browse more books
+              </Link>
+              <Link
+                href="/"
+                className="navlink mono text-[11px] tracking-[0.18em] uppercase text-[var(--muted)] inline-flex items-center gap-2"
+              >
+                Home <ArrowRight size={13} />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

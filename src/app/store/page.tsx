@@ -5,6 +5,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ShoppingCart, ArrowRight, CheckCircle2, Bell, Download, BookOpen, Wrench, Rocket, Heart } from 'lucide-react'
 
+import Reveal from '@/components/Reveal'
+import Eyebrow from '@/components/Eyebrow'
+import { contact } from '@/content/site'
+
 const books = [
   { title: 'Robotique Moderne', sub: 'Complete Robotics Guide · French', price: '$9.99', tag: 'Available', img: '/representation.png', real: true },
   { title: 'Arduino Mastery', sub: 'Fundamentals & Projects', price: '$19.99', tag: 'Coming 2027', img: '/arduino-cover.png', real: false },
@@ -27,9 +31,18 @@ const chapters = [
   'Resources & Next Steps',
 ]
 
+const features = [
+  'Arduino & ESP32 programming',
+  'Sensors, motors & electronics',
+  'AI & machine learning for robotics',
+  'Drones & autonomous vehicles',
+  'Step-by-step practical projects',
+]
+
 export default function StorePage() {
   const [buying, setBuying] = useState(false)
 
+  /* Checkout behaviour is unchanged from the original implementation. */
   async function handleBuy() {
     setBuying(true)
     try {
@@ -37,136 +50,202 @@ export default function StorePage() {
       const data = await res.json()
       if (data.url) window.location.href = data.url
       else alert('Payment system is being configured. Please check back soon or contact support@dexuslab.com')
-    } catch { alert('Something went wrong. Please try again.') }
-    finally { setBuying(false) }
+    } catch {
+      alert('Something went wrong. Please try again.')
+    } finally {
+      setBuying(false)
+    }
   }
 
   return (
-    <div className="mt-[72px]">
-      {/* Hero */}
-      <section style={{background:'linear-gradient(135deg,#060e24 0%,#0c1a3d 100%)'}} className="py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-blue-400 text-xs font-bold tracking-[3px] uppercase mb-3">Bookstore</p>
-          <h1 className="text-white text-3xl md:text-4xl font-bold tracking-tight mb-3">Engineering Library</h1>
-          <p className="text-slate-400 max-w-md mx-auto">Ebooks, guides, and resources for engineers and builders.</p>
+    <>
+      {/* Masthead */}
+      <section className="relative pt-36 pb-16 lg:pt-44 lg:pb-20 grid-tex overflow-hidden">
+        <div className="absolute inset-0 hero-bg -z-10" />
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <Reveal>
+            <Eyebrow num="01" label="Bookstore" className="mb-12" />
+          </Reveal>
+          <Reveal delay={90}>
+            <h1 className="display text-[var(--ink)] text-[clamp(2.5rem,6.5vw,5rem)] font-semibold max-w-[14ch]">
+              Engineering <span className="text-[var(--blue)]">Library</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={170}>
+            <p className="text-[var(--muted)] text-[17px] leading-[1.85] mt-8 max-w-lg">
+              Ebooks, guides, and resources for engineers and builders.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* Featured book */}
-      <section className="py-16 bg-white px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-[#f0f4ff] rounded-2xl border border-blue-100 p-6 md:p-10 grid md:grid-cols-5 gap-8 items-start">
-            {/* Cover */}
-            <div className="md:col-span-2">
-              <div className="relative rounded-xl overflow-hidden shadow-xl border border-slate-200">
-                <Image src="/representation.png" alt="Robotique Moderne — Guide Complet pour Débutants" width={600} height={900} className="w-full h-auto" />
+      {/* Featured title */}
+      <section className="py-20 lg:py-24 hair-t">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            <Reveal className="lg:col-span-5">
+              <div className="plate ticks aspect-[2/3]">
+                <Image
+                  src="/representation.png"
+                  alt="Robotique Moderne — Guide Complet pour Débutants"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                  priority
+                />
               </div>
-            </div>
+            </Reveal>
 
-            {/* Details */}
-            <div className="md:col-span-3">
-              <div className="flex items-center gap-2 mb-3 flex-wrap">
-                <span className="text-[10px] font-bold text-[#1a3ab5] bg-blue-100 px-2.5 py-1 rounded-full uppercase tracking-wider">Available Now · eBook</span>
-                {/* Language selector */}
-                <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-0.5">
-                  <span className="text-[11px] font-bold bg-[#1a3ab5] text-white px-3 py-1 rounded-md">FR</span>
-                  <span className="text-[11px] font-semibold text-slate-400 px-3 py-1 rounded-md cursor-not-allowed" title="English version coming soon">EN</span>
+            <Reveal delay={120} className="lg:col-span-7">
+              <div className="flex items-center gap-4 mb-7 flex-wrap">
+                <span className="mono text-[10px] tracking-[0.22em] uppercase text-[var(--blue)] border border-[var(--blue)]/40 px-3 py-1.5">
+                  Available Now · eBook
+                </span>
+                <div className="flex items-center border border-[var(--hair-2)]">
+                  <span className="mono text-[10px] tracking-[0.14em] bg-[var(--blue)] text-[#05070a] px-3 py-1.5">FR</span>
+                  <span
+                    className="mono text-[10px] tracking-[0.14em] text-[var(--faint)] px-3 py-1.5 cursor-not-allowed"
+                    title="English version coming soon"
+                  >
+                    EN
+                  </span>
                 </div>
-                <span className="text-[10px] text-slate-400 italic">English version coming soon</span>
+                <span className="mono text-[10px] text-[var(--faint)] italic">English version coming soon</span>
               </div>
-              <h2 className="text-slate-900 text-2xl md:text-3xl font-bold mb-1">Robotique Moderne</h2>
-              <p className="text-slate-500 italic mb-1">Guide Complet pour Débutants</p>
-              <p className="text-slate-400 text-sm mb-4">By Jean-Claude J. Desulme · Dex Atomes LLC</p>
 
-              <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                The practical guide to robotics, Arduino, ESP32, sensors, AI, drones, and real-world projects. Written in French for beginners and future engineers. From theory to practice — learn, understand, and build your own robots.
+              <h2 className="display text-[var(--ink)] text-[clamp(1.9rem,4vw,3.2rem)] font-semibold mb-3">
+                Robotique Moderne
+              </h2>
+              <p className="text-[var(--muted)] text-[16px] italic mb-2">Guide Complet pour Débutants</p>
+              <p className="mono text-[11px] text-[var(--faint)] mb-9">
+                By Jean-Claude J. Desulme · Dex Atomes LLC
               </p>
 
-              <div className="flex flex-wrap gap-x-5 gap-y-2 mb-5 text-[12px] text-slate-500">
-                <span className="flex items-center gap-1"><BookOpen size={13} className="text-[#1a3ab5]" /> 129 Pages</span>
-                <span className="flex items-center gap-1"><Wrench size={13} className="text-[#1a3ab5]" /> 10 Chapters</span>
-                <span className="flex items-center gap-1"><Rocket size={13} className="text-[#1a3ab5]" /> Hands-on Projects</span>
-                <span className="flex items-center gap-1"><Heart size={13} className="text-[#1a3ab5]" /> Fully Illustrated</span>
+              <p className="text-[var(--muted)] text-[15.5px] leading-[1.9] mb-9 max-w-xl">
+                The practical guide to robotics, Arduino, ESP32, sensors, AI, drones, and real-world
+                projects. Written in French for beginners and future engineers. From theory to
+                practice — learn, understand, and build your own robots.
+              </p>
+
+              <div className="flex flex-wrap gap-x-7 gap-y-3 mb-9 mono text-[11px] text-[var(--faint)]">
+                <span className="flex items-center gap-2"><BookOpen size={13} className="text-[var(--blue)]" /> 129 Pages</span>
+                <span className="flex items-center gap-2"><Wrench size={13} className="text-[var(--blue)]" /> 10 Chapters</span>
+                <span className="flex items-center gap-2"><Rocket size={13} className="text-[var(--blue)]" /> Hands-on Projects</span>
+                <span className="flex items-center gap-2"><Heart size={13} className="text-[var(--blue)]" /> Fully Illustrated</span>
               </div>
 
-              <div className="space-y-1.5 mb-6">
-                {['Arduino & ESP32 programming', 'Sensors, motors & electronics', 'AI & machine learning for robotics', 'Drones & autonomous vehicles', 'Step-by-step practical projects'].map(f => (
-                  <div key={f} className="flex items-center gap-2">
-                    <CheckCircle2 size={13} className="text-[#1a3ab5] shrink-0" />
-                    <span className="text-slate-600 text-sm">{f}</span>
-                  </div>
+              <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-3 mb-11">
+                {features.map(f => (
+                  <li key={f} className="flex items-center gap-2.5 text-[13.5px] text-[var(--ink-2)]">
+                    <CheckCircle2 size={13} className="text-[var(--blue)] shrink-0" /> {f}
+                  </li>
                 ))}
-              </div>
+              </ul>
 
-              <div className="flex items-center gap-4 mb-8 flex-wrap">
-                <span className="text-slate-900 text-3xl font-bold">$9.99</span>
-                <button onClick={handleBuy} disabled={buying}
-                  className="group inline-flex items-center gap-2 bg-[#1a3ab5] hover:bg-[#2348c7] text-white font-semibold px-6 py-3 rounded-lg text-sm transition-all shadow-lg shadow-blue-900/20 disabled:opacity-50">
+              <div className="flex items-center gap-7 flex-wrap mb-14">
+                <span className="display text-[var(--ink)] text-4xl font-semibold">$9.99</span>
+                <button onClick={handleBuy} disabled={buying} className="btn btn-solid disabled:opacity-50">
                   <ShoppingCart size={15} />
                   {buying ? 'Processing...' : 'Buy eBook — $9.99'}
-                  <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={14} />
                 </button>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-100 p-4">
-                <p className="text-slate-900 font-semibold text-sm mb-3">Table of Contents</p>
-                <div className="grid sm:grid-cols-2 gap-1.5">
+              {/* Table of contents */}
+              <div className="hair-t pt-8">
+                <p className="mono text-[10px] tracking-[0.22em] uppercase text-[var(--faint)] mb-7">
+                  Table of Contents
+                </p>
+                <div className="grid sm:grid-cols-2 gap-x-10">
                   {chapters.map((ch, i) => (
-                    <div key={ch} className="flex items-center gap-2 text-[12px] text-slate-500">
-                      <span className="w-5 h-5 bg-[#1a3ab5]/10 rounded text-[#1a3ab5] text-[10px] font-bold flex items-center justify-center shrink-0">{i + 1}</span>
-                      {ch}
+                    <div key={ch} className="flex items-baseline gap-4 py-3 hair-b">
+                      <span className="mono text-[10px] text-[var(--blue)]">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-[13.5px] text-[var(--ink-2)]">{ch}</span>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* All books grid */}
-      <section className="py-16 bg-[#f0f4ff] px-6">
-        <div className="max-w-6xl mx-auto">
-          <h3 className="text-slate-900 text-xl font-bold mb-8">All Books</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {books.map(b => (
-              <div key={b.title} className="group bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all">
-                <div className="relative overflow-hidden">
-                  <Image src={b.img} alt={b.title} width={400} height={520} className={`w-full h-auto group-hover:scale-105 transition-transform duration-500 ${!b.real ? 'brightness-50' : ''}`} />
-                  {b.real ? (
-                    <span className="absolute top-2 left-2 text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-[#1a3ab5] text-white">{b.tag}</span>
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                      <span className="text-4xl">🔒</span>
-                      <span className="text-white font-extrabold text-base tracking-wide uppercase">Coming Soon</span>
-                      <span className="text-slate-300 text-[11px] font-semibold tracking-widest uppercase">2027</span>
-                    </div>
-                  )}
-                </div>
-                <div className="p-5">
-                  <p className="text-slate-900 font-bold text-sm">{b.title}</p>
-                  <p className="text-slate-500 text-xs mt-0.5">{b.sub}</p>
-                  <div className="flex items-center justify-between mt-3">
-                    <span className="text-[#1a3ab5] font-bold">{b.price}</span>
+      {/* Full catalogue */}
+      <section className="py-20 lg:py-24 hair-t">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-10">
+          <Reveal>
+            <Eyebrow num="02" label="All Books" className="mb-14" />
+          </Reveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+            {books.map((b, i) => (
+              <Reveal key={b.title} delay={(i % 3) * 70}>
+                <article className="group">
+                  <div className="plate aspect-[3/4] mb-6">
+                    <Image
+                      src={b.img}
+                      alt={b.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className={`object-cover ${!b.real ? 'opacity-35' : ''}`}
+                    />
+                    {b.real ? (
+                      <span className="absolute top-4 left-4 mono text-[9px] tracking-[0.2em] uppercase text-[var(--blue)] border border-[var(--blue)]/50 px-2.5 py-1 bg-[var(--bg)]/60">
+                        {b.tag}
+                      </span>
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                        <span className="mono text-[11px] tracking-[0.24em] uppercase text-[var(--ink-2)]">
+                          Coming Soon
+                        </span>
+                        <span className="mono text-[10px] tracking-[0.24em] text-[var(--faint)]">2027</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <p className="text-[var(--ink)] text-[15px] font-medium">{b.title}</p>
+                  <p className="text-[var(--muted)] text-[12.5px] mt-1.5">{b.sub}</p>
+
+                  <div className="flex items-center justify-between mt-5 pt-4 hair-t">
+                    <span className="mono text-[13px] text-[var(--blue)]">{b.price}</span>
+
                     {b.tag === 'Available' ? (
-                      <button onClick={handleBuy} className="group/btn inline-flex items-center gap-1.5 text-[11px] font-semibold bg-[#1a3ab5] text-white px-3 py-1.5 rounded-lg hover:bg-[#2348c7] transition-colors">
+                      <button
+                        onClick={handleBuy}
+                        disabled={buying}
+                        className="mono text-[10px] tracking-[0.16em] uppercase text-[var(--ink)] inline-flex items-center gap-2 hover:text-[var(--blue)] transition-colors disabled:opacity-50"
+                      >
                         <Download size={12} /> Buy eBook
                       </button>
                     ) : (
-                      <button className="text-[11px] font-semibold bg-slate-100 text-slate-500 px-3 py-1.5 rounded-lg flex items-center gap-1">
+                      /* Was an inert button; now a real mailto so the control does what it says. */
+                      <a
+                        href={`mailto:${contact.email}?subject=${encodeURIComponent(`Notify me — ${b.title}`)}`}
+                        className="mono text-[10px] tracking-[0.16em] uppercase text-[var(--faint)] inline-flex items-center gap-2 hover:text-[var(--blue)] transition-colors"
+                      >
                         <Bell size={11} /> Notify Me
-                      </button>
+                      </a>
                     )}
                   </div>
-                </div>
-              </div>
+                </article>
+              </Reveal>
             ))}
           </div>
-        </div>
-        <div className="text-center mt-10">
-          <Link href="/" className="text-slate-500 hover:text-[#1a3ab5] text-sm transition-colors">&larr; Back to home</Link>
+
+          <Reveal delay={140}>
+            <div className="flex flex-wrap gap-4 mt-20">
+              <Link href="/contact" className="btn btn-ghost">
+                Ask a Question
+              </Link>
+              <Link href="/" className="btn btn-ghost">
+                Back Home
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
-    </div>
+    </>
   )
 }
